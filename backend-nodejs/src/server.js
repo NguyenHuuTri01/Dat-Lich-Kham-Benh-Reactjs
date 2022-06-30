@@ -8,7 +8,7 @@ import connectDB from "./config/connectDB";
 require("dotenv").config();
 
 let app = express();
-let port = process.env.PORT || 8080;
+let port = process.env.PORT || 6969;
 
 // Add headers before the routes are defined
 app.use(function (req, res, next) {
