@@ -1,4 +1,25 @@
 {
+    "homeheader":{
+        "speciality":"Medical specialty",
+        "searchdoctor": "Find a doctor by specialty",
+        "health-facility":"Health facilities",
+        "select-room":"Choose hospital clinic",
+        "doctor":"Doctor",
+        "select-doctor":"Choose a good doctor",
+        "fee":"Checkup package",
+        "check-health":"General health check",
+        "support":"Support"
+    },
+    "banner":{
+        "title1":"NỀN TẢNG Y TẾ",
+        "title2":"CHĂM SÓC SỨC KHỎE TOÀN DIỆN",
+        "child1":"Khám chuyên khoa",
+        "child2":"Khám từ xa",
+        "child3":"Khám tổng quát",
+        "child4":"Xét nghiệm y học",
+        "child5":"Sức khỏe tinh thần",
+        "child6":"Khám nha khoa"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",
