@@ -11,14 +11,14 @@
         "support":"Support"
     },
     "banner":{
-        "title1":"NỀN TẢNG Y TẾ",
-        "title2":"CHĂM SÓC SỨC KHỎE TOÀN DIỆN",
-        "child1":"Khám chuyên khoa",
-        "child2":"Khám từ xa",
-        "child3":"Khám tổng quát",
-        "child4":"Xét nghiệm y học",
-        "child5":"Sức khỏe tinh thần",
-        "child6":"Khám nha khoa"
+        "title1":"MEDICAL FOUNDATION",
+        "title2":"COMPREHENSIVE HEALTH CARE",
+        "child1":"Specialist examination",
+        "child2":"Telehealth",
+        "child3":"General check up",
+        "child4":"Medical test",
+        "child5":"Mental health",
+        "child6":"Dental examination"
     },
     "common": {
         "add": "Add",
