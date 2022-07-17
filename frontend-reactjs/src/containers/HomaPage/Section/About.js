@@ -17,7 +17,7 @@ class About extends Component {
               title="Thầy ba cười"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+              allowFullScreen
             ></iframe>
           </div>
           <div className="content-right">
