@@ -48,7 +48,8 @@
         "position":"Chức danh",
         "role":"Vai trò",
         "save":"Lưu user",
-        "image":"Ảnh đại diện"
+        "image":"Ảnh đại diện",
+        "edit":"Lưu thay đổi"
     }
 
 }
