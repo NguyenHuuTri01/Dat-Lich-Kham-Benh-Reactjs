@@ -66,6 +66,11 @@ class Login extends Component {
     console.log(this.state.showPassword);
   };
 
+  handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.keyCode === 13) {
+      this.handleLogin();
+    }
+  }
   render() {
     return (
       <div className="login-background">
@@ -90,7 +95,8 @@ class Login extends Component {
                   className="form-control login-input"
                   placeholder="Enter your password"
                   value={this.state.password}
-                  onChange={(e) => this.handleOnChangePassword(e)}
+                  onChange={(event) => this.handleOnChangePassword(event)}
+                  onKeyDown={(event) => this.handleKeyDown(event)}
                 />
                 <span onClick={() => this.handleShowHidePassword()}>
                   <i
@@ -118,8 +124,8 @@ class Login extends Component {
               <span className="">Or login with:</span>
             </div>
             <div className="col-12 social-login">
-              <i className="fab fa-facebook social-icon fb"></i>
-              <i className="fab fa-google-plus social-icon gg"></i>
+              <i className="fab fa-google-plus-g google"></i>
+              <i className="fab fa-facebook-f facebook"></i>
             </div>
           </div>
         </div>
