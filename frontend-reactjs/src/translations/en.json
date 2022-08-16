@@ -70,6 +70,30 @@
             "no-schedule": "The doctor does not have an appointment at this time, please choose another time!",
             "choose" : "Choose ",
             "book-free" : " and book (free)"
+        },
+        "extra-infor-doctor": {
+            "text-address": "Address of examination",
+            "price" : "Examination price: ",
+            "detail": "See details",
+            "payment": "The patient can pay the cost in the form of: ",
+            "hide-price": "Hide price list"
+        }
+    },
+    "system": {
+        "admin" : {
+            "manage-doctor" : {
+                "title" : "Create more information doctors",
+                "select-doctor" : "Select doctor",
+                "intro": "Introduction:",
+                "add" : "Create infor",
+                "save" : "Save infor",
+                "price" : "Price",
+                "payment" : "Payment",
+                "province": "Province",
+                "nameClinic": "Clinic's name",
+                "addressClinic":"Clinic's address",
+                "note": "Note"
         }
     }
+}
 }
