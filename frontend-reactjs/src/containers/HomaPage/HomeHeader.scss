@@ -1,90 +1,105 @@
 .home-header-container {
-  height: 70px;
-  width: 100%;
-  padding: 0 200px;
-  position: sticky;
-  top: 0;
+  height          : 70px;
+  width           : 100%;
+  padding         : 0 200px;
+  position        : sticky;
+  top             : 0;
   background-color: white;
-  z-index: 10000;
+  z-index         : 100;
+
   .home-header-content {
-    width: 100%;
-    height: 100%;
+    width  : 100%;
+    height : 100%;
     display: flex;
+
     .left-content {
-      width: 20%;
-      display: flex;
+      width      : 20%;
+      display    : flex;
       align-items: center;
+
       .header-logo {
-        background: url("../../assets/logo.svg") center no-repeat;
-        height: 90%;
-        width: 90%;
-        cursor: pointer;
-        transform: scale(0.7, 0.7);
+        background : url("../../assets/logo.svg") center no-repeat;
+        height     : 90%;
+        width      : 90%;
+        cursor     : pointer;
+        transform  : scale(0.7, 0.7);
         margin-left: -20px;
       }
+
       i {
         font-size: 25px;
-        color: grey;
-        cursor: pointer;
+        color    : grey;
+        cursor   : pointer;
       }
     }
+
     .center-content {
-      width: 55%;
-      display: flex;
+      width          : 55%;
+      display        : flex;
       justify-content: space-between;
-      align-items: center;
+      align-items    : center;
+
       .child-content {
         .subs-title {
           font-weight: 400;
-          font-size: 12px;
+          font-size  : 12px;
         }
       }
     }
+
     .right-content {
-      width: 25%;
-      display: flex;
-      align-items: center;
+      width          : 25%;
+      display        : flex;
+      align-items    : center;
       justify-content: flex-end;
 
       .support {
         padding-right: 50px;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
+        display      : flex;
+        align-items  : center;
+        cursor       : pointer;
+
         i {
           margin-right: 5px;
-          font-size: 15px;
-          color: #60c4e6;
+          font-size   : 15px;
+          color       : #60c4e6;
         }
+
         &:hover {
           color: #49bce2;
         }
       }
+
       .language-vi {
-        cursor: pointer;
+        cursor : pointer;
         opacity: 0.2;
 
         &.active {
           opacity: 1;
+
           span {
             color: orange;
           }
         }
+
         &:hover {
           opacity: 0.8;
         }
       }
+
       .language-en {
-        margin: 0 10px;
-        cursor: pointer;
+        margin : 0 10px;
+        cursor : pointer;
         opacity: 0.2;
 
         &.active {
           opacity: 1;
+
           span {
             color: blue;
           }
         }
+
         &:hover {
           opacity: 0.8;
         }
@@ -92,93 +107,101 @@
     }
   }
 }
+
 .home-header-banner {
   background: url("../../assets/header-background.jpg");
 
-  height: 580px;
-  background-repeat: no-repeat;
-  background-size: cover;
+  height             : 580px;
+  background-repeat  : no-repeat;
+  background-size    : cover;
   background-position: center;
-  display: flex;
-  flex-direction: column;
+  display            : flex;
+  flex-direction     : column;
+
   .content-up {
-    height: 65%;
+    height     : 65%;
     padding-top: 15px;
-    background-image: linear-gradient(
-      rgba(0, 0, 0, 0.25),
-      rgba(255, 255, 255, 0.1)
-    );
+    background-image: linear-gradient(rgba(0, 0, 0, 0.25),
+        rgba(255, 255, 255, 0.1));
+
     .title1 {
-      text-align: center;
-      font-size: 30px;
-      text-shadow: 1px 1px 1px #333;
+      text-align   : center;
+      font-size    : 30px;
+      text-shadow  : 1px 1px 1px #333;
       margin-bottom: 5px;
-      color: white;
-      margin-top: 30px;
+      color        : white;
+      margin-top   : 30px;
     }
+
     .title2 {
-      text-align: center;
-      font-size: 30px;
-      text-shadow: 1px 1px 1px #333;
-      color: white;
+      text-align   : center;
+      font-size    : 30px;
+      text-shadow  : 1px 1px 1px #333;
+      color        : white;
       margin-bottom: 15px;
     }
+
     .search {
-      width: fit-content;
-      display: flex;
+      width          : fit-content;
+      display        : flex;
       justify-content: center;
-      align-items: center;
-      margin: 0 auto;
-      padding: 10px;
-      border-radius: 25px;
-      background: #f7d800;
+      align-items    : center;
+      margin         : 0 auto;
+      padding        : 10px;
+      border-radius  : 25px;
+      background     : #f7d800;
+
       i {
         margin: 0 5px;
       }
+
       input {
-        height: 30px;
-        width: 360px;
+        height    : 30px;
+        width     : 360px;
         background: transparent;
-        border: none;
-        outline: none;
+        border    : none;
+        outline   : none;
       }
     }
   }
+
   .content-down {
-    height: 35%;
-    display: flex;
-    padding-bottom: 10px;
-    align-items: flex-end;
+    height         : 35%;
+    display        : flex;
+    padding-bottom : 10px;
+    align-items    : flex-end;
     justify-content: center;
-    background-image: linear-gradient(
-      rgba(255, 255, 255, 0.1),
-      rgba(255, 255, 255, 0.9),
-      rgba(255, 255, 255, 1)
-    );
+    background-image: linear-gradient(rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 1));
+
     .options {
-      text-align: center;
-      display: flex;
-      gap: 50px;
+      text-align     : center;
+      display        : flex;
+      gap            : 50px;
       justify-content: center;
 
       .option-child {
-        width: 100px;
+        width : 100px;
         cursor: pointer;
+
         .icon-child {
-          background: white;
-          width: 40px;
-          height: 40px;
-          padding: 10px;
+          background   : white;
+          width        : 40px;
+          height       : 40px;
+          padding      : 10px;
           border-radius: 50%;
-          text-align: center;
-          margin: 0 auto;
+          text-align   : center;
+          margin       : 0 auto;
+
           i {
-            color: #49bce2;
+            color    : #49bce2;
             font-size: 20px;
           }
         }
+
         .text-child {
-          font-size: 17px;
+          font-size  : 17px;
           font-weight: 500;
 
           &:hover {
