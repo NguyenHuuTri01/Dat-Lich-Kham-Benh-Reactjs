@@ -144,7 +144,7 @@ class ManageDoctor extends Component {
     })
   }
 
-  handleSaveContentMarkdown = () => {
+  handleSaveContentMarkdown = async () => {
     let { hasOldData } = this.state;
     this.props.saveDetailDoctor({
       contentHTML: this.state.contentHTML,
@@ -163,6 +163,7 @@ class ManageDoctor extends Component {
         this.state.selectedClinic.value : '',
       specialtyId: this.state.selectedSpecialty.value,
     })
+
   }
 
   handleChangeSelect = async (selectedDoctor) => {

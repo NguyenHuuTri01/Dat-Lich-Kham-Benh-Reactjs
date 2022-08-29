@@ -53,8 +53,9 @@
             }
 
             .note {
-                max-width    : 600px;
+                width        : 600px;
                 padding-right: 5px;
+                word-break   : break-word;
             }
         }
 
