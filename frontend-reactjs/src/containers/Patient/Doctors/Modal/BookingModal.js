@@ -110,6 +110,16 @@ class BookingModal extends Component {
         if (res && res.errCode === 0) {
             toast.success('Booking a new appointment succeed!');
             this.props.closeBookingClose();
+            this.setState({
+                fullName: '',
+                phoneNumber: '',
+                email: '',
+                address: '',
+                reason: '',
+                birthday: '',
+                selectedGender: '',
+                genders: '',
+            })
         } else {
             toast.error('Booking a new appointment error!');
         }
@@ -171,6 +181,8 @@ class BookingModal extends Component {
                                 doctorId={doctorId}
                                 isShowDescriptionDoctor={false}
                                 dataTime={dataTime}
+                                isShowLinkDetail={false}
+                                isShowPrice={true}
                             />
                         </div>
                         <div className="row">
