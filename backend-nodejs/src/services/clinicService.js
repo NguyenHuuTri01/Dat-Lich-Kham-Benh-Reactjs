@@ -51,6 +51,29 @@ let getAllClinic = () => {
         }
     })
 }
+let getTopClinicHome = (limit) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let data = await db.Clinic.findAll({
+                limit: limit,
+                order: [["createdAt", "DESC"]]
+            });
+            if (data && data.length > 0) {
+                data.map(item => {
+                    item.image = new Buffer(item.image, "base64").toString("binary");
+                    return item;
+                })
+            }
+            resolve({
+                errCode: 0,
+                errMessage: 'Ok',
+                data
+            })
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
 let getDetailClinicById = (inputId) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -92,5 +115,6 @@ let getDetailClinicById = (inputId) => {
 module.exports = {
     createClinic: createClinic,
     getAllClinic: getAllClinic,
-    getDetailClinicById: getDetailClinicById
+    getDetailClinicById: getDetailClinicById,
+    getTopClinicHome: getTopClinicHome,
 }

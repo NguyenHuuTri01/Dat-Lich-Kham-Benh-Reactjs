@@ -61,7 +61,7 @@ let getAllDoctors = () => {
 
 let checkRequireFields = (inputData) => {
   let arrFields = ['doctorId', 'contentHTML', 'contentMarkdown', 'action', 'selectedPrice',
-    'selectedPayment', 'selectedProvince', 'nameClinic', 'addressClinic', 'note',
+    'selectedPayment', 'selectedProvince', 'note',
     'specialtyId'
   ]
   let isValid = true;
@@ -126,8 +126,8 @@ let saveDetailInforDoctor = (inputData) => {
           doctorInfor.priceId = inputData.selectedPrice;
           doctorInfor.provinceId = inputData.selectedProvince;
           doctorInfor.paymentId = inputData.selectedPayment;
-          doctorInfor.nameClinic = inputData.nameClinic;
-          doctorInfor.addressClinic = inputData.addressClinic;
+          // doctorInfor.nameClinic = inputData.nameClinic;
+          // doctorInfor.addressClinic = inputData.addressClinic;
           doctorInfor.note = inputData.note;
           doctorInfor.specialtyId = inputData.specialtyId;
           doctorInfor.clinicId = inputData.clinicId;
@@ -139,8 +139,8 @@ let saveDetailInforDoctor = (inputData) => {
             priceId: inputData.selectedPrice,
             provinceId: inputData.selectedProvince,
             paymentId: inputData.selectedPayment,
-            nameClinic: inputData.nameClinic,
-            addressClinic: inputData.addressClinic,
+            // nameClinic: inputData.nameClinic,
+            // addressClinic: inputData.addressClinic,
             note: inputData.note,
             specialtyId: inputData.specialtyId,
             clinicId: inputData.clinicId,
@@ -303,6 +303,7 @@ let getExtraInforDoctorById = (idInput) => {
             { model: db.Allcode, as: "priceTypeData", attributes: ["valueEn", "valueVi"] },
             { model: db.Allcode, as: "provinceTypeData", attributes: ["valueEn", "valueVi"] },
             { model: db.Allcode, as: "paymentTypeData", attributes: ["valueEn", "valueVi"] },
+            { model: db.Clinic, as: "clinicTypeData", attributes: ["name", "address"] },
           ],
           raw: false,
           nest: true

@@ -79,5 +79,4 @@ module.exports = {
   handleEditUser: handleEditUser,
   handleDelelteUser: handleDelelteUser,
   getAllCode,
-  getAllCode,
 };
