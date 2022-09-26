@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Slider from "react-slick";
-import { getAllClinic } from '../../../services/userService';
+import { getAllClinic, getTopClinicHomeService } from '../../../services/userService';
 import { withRouter } from 'react-router';
-import './MedicalFacility.scss'
+import './MedicalFacility.scss';
+import { FormattedMessage } from "react-intl";
 
 class MedicalFacility extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class MedicalFacility extends Component {
     }
   }
   async componentDidMount() {
-    let res = await getAllClinic();
+    let res = await getTopClinicHomeService(10);
     if (res && res.errCode === 0) {
       this.setState({
         dataClinics: res.data ? res.data : []
@@ -33,8 +34,12 @@ class MedicalFacility extends Component {
       <div className="section-share section-medical-facility">
         <div className="section-container">
           <div className="section-header">
-            <span className="title-section">Cơ sở y tế nổi bật</span>
-            <button className="btn-section">xem thêm</button>
+            <span className="title-section">
+              <FormattedMessage id="homepage.outstanding-medical-facility" />
+            </span>
+            <button className="btn-section">
+              <FormattedMessage id="homepage.more-infor" />
+            </button>
           </div>
           <div className="section-body">
             <Slider {...this.props.settings}>

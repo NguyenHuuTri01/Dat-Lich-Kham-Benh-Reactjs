@@ -7,6 +7,40 @@ import { changeLanguageApp } from "../../store/actions";
 import { withRouter } from 'react-router'
 
 class HomeHeader extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchLanguage: ''
+    }
+  }
+  async componentDidMount() {
+    let { language } = this.props;
+    if (language === LANGUAGES.VI) {
+      this.setState({
+        searchLanguage: 'Tìm chuyên khoa khám bệnh'
+      })
+    } else {
+      this.setState({
+        searchLanguage: 'Search for medical specialties'
+      })
+    }
+  }
+
+  async componentDidUpdate(prevProps, prevState, snapshot) {
+    let { language } = this.props;
+    if (this.props.language !== prevProps.language) {
+      if (language === LANGUAGES.VI) {
+        this.setState({
+          searchLanguage: 'Tìm chuyên khoa khám bệnh'
+        })
+      } else {
+        this.setState({
+          searchLanguage: 'Search for medical specialties'
+        })
+      }
+    }
+
+  }
   changeLanguage = (language) => {
     this.props.changeLanguageAppRedux(language);
   };
@@ -16,8 +50,8 @@ class HomeHeader extends Component {
     }
   }
   render() {
-    let language = this.props.language;
-
+    let { language } = this.props;
+    let { searchLanguage } = this.state;
     return (
       <React.Fragment>
         <div className="home-header-container">
@@ -109,7 +143,10 @@ class HomeHeader extends Component {
               </div>
               <div className="search">
                 <i className="fas fa-search"></i>
-                <input type="text" placeholder="Tìm chuyên khoa khám bệnh" />
+                <input
+                  type="text"
+                  placeholder={searchLanguage}
+                />
               </div>
             </div>
             <div className="content-down">

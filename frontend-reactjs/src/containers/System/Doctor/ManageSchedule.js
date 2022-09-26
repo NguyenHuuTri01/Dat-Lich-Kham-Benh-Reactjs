@@ -27,13 +27,36 @@ class ManageSchedule extends Component {
         this.props.fetchAllScheduleTime();
     }
 
+    buildDefaultSelect = (inputData) => {
+        let result = [];
+        let { language } = this.props;
+        if (inputData && inputData.firstName && inputData.lastName && inputData.id) {
+            let object = {};
+            let labelVi = `${inputData.lastName} ${inputData.firstName}`;
+            let labelEn = `${inputData.firstName} ${inputData.lastName}`;
+            object.label = language === LANGUAGES.VI ? labelVi : labelEn;
+            object.value = inputData.id;
+            result.push(object);
+        }
+        return result;
+    }
     componentDidUpdate(prevProps, prevState, snapshot) {
+
         if (prevProps.allDoctors !== this.props.allDoctors) {
             let dataSelect = this.buildDataInputSelect(this.props.allDoctors)
-            this.setState({
-                listDoctors: dataSelect
-            })
+            if (this.props.user.roleId === 'R2') {
+                let selectedDoctorDefault = this.buildDefaultSelect(this.props.user)
+                this.setState({
+                    listDoctors: dataSelect,
+                    selectedDoctor: selectedDoctorDefault[0]
+                })
+            } else {
+                this.setState({
+                    listDoctors: dataSelect
+                })
+            }
         }
+
         if (prevProps.allScheduleTime !== this.props.allScheduleTime) {
             let data = this.props.allScheduleTime;
             if (data && data.length > 0) {
@@ -49,13 +72,12 @@ class ManageSchedule extends Component {
                 rangeTime: data
             })
         }
-
-        // if (prevProps.language !== this.props.language) {
-        //     let dataSelect = this.buildDataInputSelect(this.props.allDoctors)
-        //     this.setState({
-        //         listDoctors: dataSelect
-        //     })
-        // }
+        if (prevProps.language !== this.props.language) {
+            let selectedDoctorDefault = this.buildDefaultSelect(this.props.user)
+            this.setState({
+                selectedDoctor: selectedDoctorDefault[0]
+            })
+        }
     }
     buildDataInputSelect = (inputData) => {
         let result = [];
@@ -136,8 +158,9 @@ class ManageSchedule extends Component {
         }
     }
     render() {
+        console.log('check props: ', this.props.user);
         let { rangeTime } = this.state;
-        let { language } = this.props;
+        let { language, user } = this.props;
         let yesterday = new Date(new Date().setDate(new Date().getDate() - 1))
         return (
             <div className="manage-schedule-container">
@@ -150,7 +173,7 @@ class ManageSchedule extends Component {
                             <label><FormattedMessage id={"manage-schedule.choose-doctor"} /></label>
                             <Select
                                 value={this.state.selectedDoctor}
-                                onChange={this.handleChangeSelect}
+                                onChange={user.roleId === 'R1' ? this.handleChangeSelect : ''}
                                 options={this.state.listDoctors}
                             />
                         </div>
@@ -203,7 +226,8 @@ const mapStateToProps = (state) => {
         isLoggedIn: state.user.isLoggedIn,
         language: state.app.language,
         allDoctors: state.admin.allDoctors,
-        allScheduleTime: state.admin.allScheduleTime
+        allScheduleTime: state.admin.allScheduleTime,
+        user: state.user.userInfo
     };
 };
 

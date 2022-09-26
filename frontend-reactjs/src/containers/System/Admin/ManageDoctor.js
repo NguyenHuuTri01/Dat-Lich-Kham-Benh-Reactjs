@@ -39,8 +39,8 @@ class ManageDoctor extends Component {
       selectedClinic: '',
       selectedSpecialty: '',
 
-      nameClinic: '',
-      addressClinic: '',
+      // nameClinic: '',
+      // addressClinic: '',
       note: '',
       clinicId: '',
       specialtyId: ''
@@ -167,8 +167,8 @@ class ManageDoctor extends Component {
       selectedPrice: this.state.selectedPrice.value,
       selectedPayment: this.state.selectedPayment.value,
       selectedProvince: this.state.selectedProvince.value,
-      nameClinic: this.state.nameClinic,
-      addressClinic: this.state.addressClinic,
+      // nameClinic: this.state.nameClinic,
+      // addressClinic: this.state.addressClinic,
       note: this.state.note,
       clinicId: this.state.selectedClinic && this.state.selectedClinic.value ?
         this.state.selectedClinic.value : '',
@@ -189,8 +189,8 @@ class ManageDoctor extends Component {
         specialtyId = '', selectedSpecialty = '', selectedClinic = ''
 
       if (res.data.Doctor_Infor) {
-        addressClinic = res.data.Doctor_Infor.addressClinic;
-        nameClinic = res.data.Doctor_Infor.nameClinic;
+        // addressClinic = res.data.Doctor_Infor.addressClinic;
+        // nameClinic = res.data.Doctor_Infor.nameClinic;
         note = res.data.Doctor_Infor.note;
 
         paymentId = res.data.Doctor_Infor.paymentId;
@@ -221,8 +221,8 @@ class ManageDoctor extends Component {
         contentMarkdown: markdown.contentMarkdown,
         description: markdown.description,
         hasOldData: true,
-        addressClinic: addressClinic,
-        nameClinic: nameClinic,
+        // addressClinic: addressClinic,
+        // nameClinic: nameClinic,
         note: note,
         selectedPrice: selectedPrice,
         selectedPayment: selectedPayment,
@@ -236,8 +236,8 @@ class ManageDoctor extends Component {
         contentMarkdown: '',
         description: '',
         hasOldData: false,
-        addressClinic: '',
-        nameClinic: '',
+        // addressClinic: '',
+        // nameClinic: '',
         note: '',
         selectedPrice: '',
         selectedPayment: '',
@@ -321,21 +321,8 @@ class ManageDoctor extends Component {
               name="selectedProvince"
             />
           </div>
-
-          <div className="col-4 form-group">
-            <label><FormattedMessage id="system.admin.manage-doctor.nameClinic" /></label>
-            <input className="form-control"
-              onChange={(event) => this.handleOnChangeText(event, 'nameClinic')}
-              value={this.state.nameClinic}
-            />
-          </div>
-          <div className="col-4 form-group">
-            <label><FormattedMessage id="system.admin.manage-doctor.addressClinic" /></label>
-            <input className="form-control"
-              onChange={(event) => this.handleOnChangeText(event, 'addressClinic')}
-              value={this.state.addressClinic}
-            />
-          </div>
+        </div>
+        <div className="row">
           <div className="col-4 form-group">
             <label><FormattedMessage id="system.admin.manage-doctor.note" /></label>
             <input className="form-control"
@@ -343,8 +330,6 @@ class ManageDoctor extends Component {
               value={this.state.note}
             />
           </div>
-        </div>
-        <div className="row">
           <div className="col-4 form-group">
             <label>
               <FormattedMessage id="system.admin.manage-doctor.specialty" />

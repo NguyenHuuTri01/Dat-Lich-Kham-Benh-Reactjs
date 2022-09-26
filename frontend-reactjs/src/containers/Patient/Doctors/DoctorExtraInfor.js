@@ -48,6 +48,7 @@ class DoctorExtraInfor extends Component {
     }
     render() {
         let { isShowDetailInfor, extraInfor } = this.state;
+        console.log('check state:', extraInfor);
         let { language } = this.props;
         return (
             <div className="doctor-extra-infor-container">
@@ -56,10 +57,10 @@ class DoctorExtraInfor extends Component {
                         <FormattedMessage id="patient.extra-infor-doctor.text-address" />
                     </div>
                     <div className="name-clinic">
-                        {extraInfor && extraInfor.nameClinic ? extraInfor.nameClinic : ''}
+                        {extraInfor && extraInfor.clinicTypeData && extraInfor.clinicTypeData.name ? extraInfor.clinicTypeData.name : ''}
                     </div>
                     <div className="detail-address">
-                        {extraInfor && extraInfor.addressClinic ? extraInfor.addressClinic : ''}
+                        {extraInfor && extraInfor.clinicTypeData && extraInfor.clinicTypeData.address ? extraInfor.clinicTypeData.address : ''}
                     </div>
                 </div>
                 <div className="content-down">

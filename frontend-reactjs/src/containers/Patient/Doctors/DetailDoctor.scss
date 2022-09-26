@@ -3,14 +3,18 @@
 
   .intro-doctor {
     display: flex;
+    margin : 0 100px;
 
     .content-left {
-      width        : 20%;
-      background   : center center no-repeat;
-      width        : 120px;
-      height       : 120px;
-      border-radius: 50%;
-      margin       : 10px 20px;
+      width              : 20%;
+      // background   : center center no-repeat;
+      background-size    : cover;
+      background-repeat  : no-repeat;
+      background-position: center;
+      width              : 120px;
+      height             : 120px;
+      border-radius      : 50%;
+      margin             : 10px 20px;
     }
 
     .content-right {
@@ -27,6 +31,10 @@
 
       .down {
         padding-top: 10px;
+
+        .like-share-plugin {
+          margin: 10px 0 20px 0;
+        }
       }
     }
   }
@@ -48,9 +56,12 @@
 
   .detail-infor-doctor {
     border-top      : 1px solid #ddd;
+    border-bottom   : 1px solid #ddd;
     background-color: #f9f9f9;
     padding         : 10px 100px;
 
+    h1,
+    h2,
     h3 {
       font-size: 17px;
     }
@@ -61,6 +72,6 @@
   }
 
   .comment-doctor {
-    height: 50px;
+    padding: 10px 100px;
   }
 }

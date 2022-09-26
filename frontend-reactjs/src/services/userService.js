@@ -72,6 +72,9 @@ const createNewClinic = (data) => {
 const getAllClinic = () => {
   return axios.get(`/api/get-all-clinic`);
 }
+const getTopClinicHomeService = (limit) => {
+  return axios.get(`/api/top-clinic-home?limit=${limit}`);
+};
 const getDetailClinicById = (data) => {
   return axios.get(`/api/get-detail-clinic-by-id?id=${data.id}`);
 }
@@ -80,10 +83,26 @@ const getAllPatientForDoctor = (data) => {
   return axios.get(`/api/get-list-patient-for-doctor?doctorId=${data.doctorId}&date=${data.date}`);
 }
 
-
 const postSendRemedy = (data) => {
   return axios.post('/api/send-remedy', data)
 }
+
+const createNewHandBook = (data) => {
+  return axios.post('/api/create-new-handbook', data)
+}
+const editHandBook = (inputData) => {
+  return axios.put("/api/edit-handbook", inputData);
+};
+const deleteHandBook = (handBookId) => {
+  return axios.delete("/api/delete-handbook", {
+    data: {
+      id: handBookId,
+    },
+  });
+};
+const getAllHandBook = () => {
+  return axios.get(`/api/get-all-handbook`);
+};
 export {
   handleLoginApi,
   getAllUsers,
@@ -109,4 +128,9 @@ export {
   getDetailClinicById,
   getAllPatientForDoctor,
   postSendRemedy,
+  getAllHandBook,
+  getTopClinicHomeService,
+  createNewHandBook,
+  editHandBook,
+  deleteHandBook
 };
