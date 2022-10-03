@@ -19,7 +19,8 @@
         "child3":"Khám tổng quát",
         "child4":"Xét nghiệm y học",
         "child5":"Sức khỏe tinh thần",
-        "child6":"Khám nha khoa"
+        "child6":"Khám nha khoa",
+        "search": "Tìm chuyên khoa khám bệnh"
     },
     "menu": {
         "admin":{

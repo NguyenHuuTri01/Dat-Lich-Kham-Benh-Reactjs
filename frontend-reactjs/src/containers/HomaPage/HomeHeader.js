@@ -4,41 +4,46 @@ import "./HomeHeader.scss";
 import { FormattedMessage } from "react-intl";
 import { LANGUAGES } from "../../utils";
 import { changeLanguageApp } from "../../store/actions";
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router';
+import Select from 'react-select';
+import { getAllSpecialty } from '../../services/userService'
+
 
 class HomeHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchLanguage: ''
+      selectedSpecialty: '',
+      listSpecialty: []
     }
   }
   async componentDidMount() {
-    let { language } = this.props;
-    if (language === LANGUAGES.VI) {
+
+    let res = await getAllSpecialty();
+    if (res && res.errCode === 0) {
       this.setState({
-        searchLanguage: 'Tìm chuyên khoa khám bệnh'
-      })
-    } else {
-      this.setState({
-        searchLanguage: 'Search for medical specialties'
+        listSpecialty: this.buildDataInputSelect(res.data)
       })
     }
   }
-
+  buildDataInputSelect = (inputData) => {
+    let result = [];
+    if (inputData && inputData.length > 0) {
+      inputData.map((item, index) => {
+        let object = {};
+        object.label = item.name;
+        object.value = item.id;
+        result.push(object);
+      })
+    }
+    return result;
+  }
   async componentDidUpdate(prevProps, prevState, snapshot) {
     let { language } = this.props;
     if (this.props.language !== prevProps.language) {
-      if (language === LANGUAGES.VI) {
-        this.setState({
-          searchLanguage: 'Tìm chuyên khoa khám bệnh'
-        })
-      } else {
-        this.setState({
-          searchLanguage: 'Search for medical specialties'
-        })
-      }
+
     }
+
 
   }
   changeLanguage = (language) => {
@@ -49,9 +54,13 @@ class HomeHeader extends Component {
       this.props.history.push(`/home`);
     }
   }
+  handleChangeSelect = async (selectedSpecialty) => {
+    if (this.props.history) {
+      this.props.history.push(`/detail-specialty/${selectedSpecialty.value}`);
+    }
+  };
   render() {
     let { language } = this.props;
-    let { searchLanguage } = this.state;
     return (
       <React.Fragment>
         <div className="home-header-container">
@@ -143,9 +152,19 @@ class HomeHeader extends Component {
               </div>
               <div className="search">
                 <i className="fas fa-search"></i>
-                <input
-                  type="text"
-                  placeholder={searchLanguage}
+                <Select
+                  className="select-search"
+                  value={this.state.selectedSpecialty}
+                  styles={
+                    {
+                      control: () => ({
+                        backgroundColor: 'transparent',
+                      }),
+                    }
+                  }
+                  onChange={this.handleChangeSelect}
+                  options={this.state.listSpecialty}
+                  placeholder={<FormattedMessage id="banner.search" />}
                 />
               </div>
             </div>

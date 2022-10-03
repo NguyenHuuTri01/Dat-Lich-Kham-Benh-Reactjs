@@ -17,16 +17,20 @@ class TableManageHandBook extends Component {
     }
     async componentDidMount() {
         let list = await getAllHandBook();
-        this.setState({
-            listHandBook: list
-        })
+        if (list && list.errCode === 0) {
+            this.setState({
+                listHandBook: list
+            })
+        }
     }
     async componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.listHandBook !== this.state.listHandBook) {
             let list = await getAllHandBook();
-            this.setState({
-                listHandBook: list
-            })
+            if (list && list.errCode === 0) {
+                this.setState({
+                    listHandBook: list
+                })
+            }
         }
     }
     handleDeleteHandBook = async (item) => {

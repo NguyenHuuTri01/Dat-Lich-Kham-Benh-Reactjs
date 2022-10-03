@@ -103,6 +103,9 @@ const deleteHandBook = (handBookId) => {
 const getAllHandBook = () => {
   return axios.get(`/api/get-all-handbook`);
 };
+const getDetailHandBookById = (id) => {
+  return axios.get(`/api/get-detail-handbook-by-id?id=${id}`);
+}
 export {
   handleLoginApi,
   getAllUsers,
@@ -132,5 +135,6 @@ export {
   getTopClinicHomeService,
   createNewHandBook,
   editHandBook,
-  deleteHandBook
+  deleteHandBook,
+  getDetailHandBookById
 };
