@@ -53,6 +53,7 @@ let initWebRoutes = (app) => {
   router.put("/api/edit-handbook", handBookController.handleEditHandBook);
   router.delete("/api/delete-handbook", handBookController.handleDelelteHandBook);
   router.get("/api/get-all-handbook", handBookController.getAllHandBook);
+  router.get("/api/get-detail-handbook-by-id", handBookController.getDetailHandBookById);
 
   return app.use("/", router);
 };

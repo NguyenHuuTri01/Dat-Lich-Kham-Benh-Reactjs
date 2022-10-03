@@ -52,9 +52,24 @@ let handleDelelteHandBook = async (req, res) => {
     let message = await handBookService.handleDelelteHandBook(req.body.id);
     return res.status(200).json(message);
 }
+let getDetailHandBookById = async (req, res) => {
+    try {
+        let infor = await handBookService.getDetailHandBookById(req.query.id);
+        return res.status(200).json(
+            infor
+        )
+    } catch (e) {
+        console.log(e);
+        return res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error from the server'
+        })
+    }
+}
 module.exports = {
     createHandBook: createHandBook,
     handleEditHandBook: handleEditHandBook,
     handleDelelteHandBook: handleDelelteHandBook,
     getAllHandBook: getAllHandBook,
+    getDetailHandBookById: getDetailHandBookById,
 }
