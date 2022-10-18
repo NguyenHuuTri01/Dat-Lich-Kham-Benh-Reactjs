@@ -92,9 +92,24 @@ class BookingModal extends Component {
     }
     handleConfirmBooking = async () => {
         // validate input
+        const regExEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+        // là dãy kí tự gồm a-z, A-Z, 0-9 và _ dấu (.) ; tiếp theo phải có kí tự(lặp lại nhiều lần)
+        // sau đó đến @
+        // sau đó đến 1 khối được tạo từ các kí tự, lặp lại nhiều lần, phía sau phải có kí tự
+        // tiếp đến cũng 1 khối kí tự gồm 2-4 kí tự
+        if (!regExEmail.test(this.state.email) && this.state.email !== '') {
+            alert('email is not valid');
+            return;
+        }
+        const regExPhoneNumber = /(((\+|)84)|0)(3|5|7|8|9)+([0-9]{8})\b/g;
+        if (!regExPhoneNumber.test(this.state.phoneNumber) && this.state.phoneNumber !== '') {
+            alert('phonenumber is not valid');
+            return;
+        }
         this.setState({
             isShowLoading: true
         })
+
         let date = new Date(this.state.birthday).getTime();
         let timeString = this.buildTimeBooking(this.props.dataTime);
         let doctorName = this.buildDoctorName(this.props.dataTime);
@@ -165,7 +180,8 @@ class BookingModal extends Component {
     }
     render() {
         let { isOpenModal, closeBookingClose, dataTime } = this.props;
-        let doctorId = dataTime && !_.isEmpty(dataTime) ? dataTime.doctorId : ''
+        let doctorId = dataTime && !_.isEmpty(dataTime) ? dataTime.doctorId : '';
+        let maxDate = new Date(new Date().setDate(new Date().getDate() - 365));
         return (
             <LoadingOverlay
                 active={this.state.isShowLoading}
@@ -254,6 +270,7 @@ class BookingModal extends Component {
                                         onChange={this.handleOnChangeDatePicker}
                                         className="form-control"
                                         value={this.state.birthday}
+                                        maxDate={maxDate}
                                     />
                                 </div>
                                 <div className="col-6 form-group">

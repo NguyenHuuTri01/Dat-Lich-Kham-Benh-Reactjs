@@ -21,12 +21,24 @@ class HandBook extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-
+  async componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevState.dataHandBook !== this.state.dataHandBook) {
+      let res = await getAllHandBook();
+      if (res && res.errCode === 0) {
+        this.setState({
+          dataHandBook: res.data
+        })
+      }
+    }
   }
   handleOnclick = (item) => {
     if (this.props.history) {
       this.props.history.push(`/detail-handbook/${item.id}`);
+    }
+  }
+  handleMoreHandbook = () => {
+    if (this.props.history) {
+      this.props.history.push(`/more-handbook/`);
     }
   }
   render() {
@@ -38,7 +50,7 @@ class HandBook extends Component {
             <span className="title-section">
               <FormattedMessage id="homepage.handbook" />
             </span>
-            <button className="btn-section">
+            <button className="btn-section" onClick={() => this.handleMoreHandbook()}>
               <FormattedMessage id="homepage.more-infor" />
             </button>
           </div>

@@ -21,6 +21,10 @@ import VerifyEmail from "./Patient/VerifyEmail";
 import DetailSpecialty from "./Patient/Specialty/DetailSpecialty";
 import DetailClinic from "./Patient/Clinic/DetailClinic";
 import DetailHandBook from "./Patient/HandBook/DetailHandBook";
+import more_Specialty from "./HomaPage/Section/MoreInfor/more_Specialty";
+import more_Clinic from "./HomaPage/Section/MoreInfor/more_Clinic";
+import more_Doctor from "./HomaPage/Section/MoreInfor/more_Doctor";
+import more_Handbook from "./HomaPage/Section/MoreInfor/more_Handbook";
 
 class App extends Component {
   handlePersistorState = () => {
@@ -59,6 +63,11 @@ class App extends Component {
                   <Route path={path.DETAIL_SPECIALTY} component={DetailSpecialty} />
                   <Route path={path.DETAIL_CLINIC} component={DetailClinic} />
                   <Route path={path.DETAIL_HANDBOOK} component={DetailHandBook} />
+
+                  <Route path={path.MORE_SPECIALTY} component={more_Specialty} />
+                  <Route path={path.MORE_CLINIC} component={more_Clinic} />
+                  <Route path={path.MORE_DOCTOR} component={more_Doctor} />
+                  <Route path={path.MORE_HANDBOOK} component={more_Handbook} />
 
                   <Route path={path.VERIFY_EMAIL_BOOKING} component={VerifyEmail} />
                 </Switch>

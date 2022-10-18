@@ -39,6 +39,14 @@ class UserRedux extends Component {
     this.props.getRoleStart();
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.language !== this.props.language) {
+      if (this.props.language === LANGUAGES.VI) {
+        this.props.changeLanguageAppRedux(LANGUAGES.VI)
+      } else {
+        this.props.changeLanguageAppRedux(LANGUAGES.EN)
+      }
+    }
+
     if (prevProps.genderRedux !== this.props.genderRedux) {
       let arrGenders = this.props.genderRedux;
       this.setState({
@@ -102,10 +110,25 @@ class UserRedux extends Component {
       isOpen: true,
     });
   };
+
+
   handleSaveUser = () => {
     let isValid = this.checkValidateInput();
     if (isValid === false) return;
-
+    const regExEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    // là dãy kí tự gồm a-z, A-Z, 0-9 và _ dấu (.) ; tiếp theo phải có kí tự(lặp lại nhiều lần)
+    // sau đó đến @
+    // sau đó đến 1 khối được tạo từ các kí tự, lặp lại nhiều lần, phía sau phải có kí tự
+    // tiếp đến cũng 1 khối kí tự gồm 2-4 kí tự
+    if (!regExEmail.test(this.state.email) && this.state.email !== '') {
+      alert('email is not valid');
+      return;
+    }
+    const regExPhoneNumber = /(((\+|)84)|0)(3|5|7|8|9)+([0-9]{8})\b/g;
+    if (!regExPhoneNumber.test(this.state.phoneNumber) && this.state.phoneNumber !== '') {
+      alert('phonenumber is not valid');
+      return;
+    }
     let { action } = this.state;
     if (action === CRUD_ACTION.CREATE) {
       this.props.createNewUser({
@@ -206,8 +229,10 @@ class UserRedux extends Component {
 
     return (
       <div className="user-redux-container">
-        <div className="title">User redux</div>
+        <div className="title"><FormattedMessage id="manage-user.create-user" /></div>
         <div className="user-redux-body">
+          <div>
+          </div>
           <div className="container">
             <div className="row">
               <div className="col-12 my-3">
@@ -381,7 +406,8 @@ class UserRedux extends Component {
                     onChange={(event) => this.handleOnChangeImage(event)}
                   />
                   <label className="label-upload" htmlFor="previewImg">
-                    Tải ảnh <i className="fas fa-upload"></i>
+                    <FormattedMessage id="manage-user.load-img" />
+                    <i className="fas fa-upload"></i>
                   </label>
                   <div
                     className="preview-image"
@@ -448,8 +474,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchUserRedux: () => dispatch(actions.fetchAllUsersStart()),
     editAUserRedux: (data) => dispatch(actions.editAUser(data)),
     // processLogout: () => dispatch(actions.processLogout()),
-    // changeLanguageAppRedux: (language) =>
-    //   dispatch(actions.changeLanguageApp(language)),
+    changeLanguageAppRedux: (language) =>
+      dispatch(actions.changeLanguageApp(language)),
   };
 };
 

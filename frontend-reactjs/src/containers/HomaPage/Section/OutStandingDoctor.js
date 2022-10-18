@@ -18,6 +18,7 @@ class OutStandingDoctor extends Component {
       this.setState({
         arrDoctors: this.props.topDoctorsRedux,
       });
+      this.props.loadTopDoctors();
     }
   }
   componentDidMount() {
@@ -26,6 +27,11 @@ class OutStandingDoctor extends Component {
   handleViewDetailDoctor = (doctor) => {
     if (this.props.history) {
       this.props.history.push(`/detail-doctor/${doctor.id}`)
+    }
+  }
+  handleMoreDoctor = () => {
+    if (this.props.history) {
+      this.props.history.push(`/more-doctor/`)
     }
   }
   render() {
@@ -38,7 +44,7 @@ class OutStandingDoctor extends Component {
             <span className="title-section">
               <FormattedMessage id="homepage.outstanding-doctor" />
             </span>
-            <button className="btn-section">
+            <button className="btn-section" onClick={() => this.handleMoreDoctor()}>
               <FormattedMessage id="homepage.more-infor" />
             </button>
           </div>

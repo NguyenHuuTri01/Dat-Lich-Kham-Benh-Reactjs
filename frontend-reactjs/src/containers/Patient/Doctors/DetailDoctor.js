@@ -34,7 +34,7 @@ class DetailDoctor extends Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    async componentDidUpdate(prevProps, prevState, snapshot) {
 
     }
 
@@ -74,11 +74,11 @@ class DetailDoctor extends Component {
                                         {detailDoctor.Markdown.description}
                                     </span>
                                 }
-                                <div className="like-share-plugin">
+                                {/* <div className="like-share-plugin">
                                     <LikeAndShare
                                         dataHref={currentURL}
                                     />
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
@@ -103,12 +103,12 @@ class DetailDoctor extends Component {
                             </div>
                         }
                     </div>
-                    <div className="comment-doctor">
+                    {/* <div className="comment-doctor">
                         <Comment
                             dataHref={currentURL}
                             width={"100%"}
                         />
-                    </div>
+                    </div> */}
                 </div>
             </>
         );

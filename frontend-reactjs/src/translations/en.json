@@ -25,10 +25,11 @@
     "menu": {
         "admin":{
             "manage-user":"Users system",
-            "manage-doctor":"Manage doctors",
+            "change-password": "Change password",
+            "manage-doctor":"Manage doctor information",
             "manage-admin": "Manage admins",
             "crud":"CRUD user",
-            "crud-redux":"CRUD redux",
+            "crud-redux":"Create user",
             "clinic":"Clinics",
             "manage-clinic":"Manage clinics",
             "specialty":"Specialties",
@@ -54,7 +55,9 @@
         "role":"Role",
         "image":"Avatar",
         "save":"Save user",
-        "edit":"Edit user"
+        "edit":"Edit user",
+        "create-user": "Create new user",
+        "load-img": "Load image"
     },
     "homepage" : {
         "outstanding-doctor" : "Outstanding doctors last week",
@@ -64,7 +67,7 @@
         "handbook":"Handbook"
     },
     "manage-schedule": {
-        "title" : "Manage doctor's examination plan",
+        "title" : "Manage doctor's appointment schedule",
         "choose-doctor": "Choose doctor",
         "choose-date":"Choose date",
         "save": "save infor"

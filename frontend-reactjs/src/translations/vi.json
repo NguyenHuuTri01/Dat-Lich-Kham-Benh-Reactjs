@@ -25,10 +25,11 @@
     "menu": {
         "admin":{
             "manage-user":"Người dùng",
-            "manage-doctor":"Quản lý bác sĩ",
+            "change-password": "Đổi mật khẩu",
+            "manage-doctor":"Quản lý thông tin bác sĩ",
             "manage-admin": "Quản lý admin",
             "crud":"CRUD user",
-            "crud-redux":"CRUD redux",
+            "crud-redux":"Tạo User",
             "clinic":"Phòng khám",
             "manage-clinic":"Quản lý phòng khám",
             "specialty":"Chuyên khoa",
@@ -37,7 +38,7 @@
             "manage-handbook":"Quản lý cẩm nang"
         },
         "doctor": {
-            "manage-schedule": "Quản lý kế hoạch khám bệnh",
+            "manage-schedule": "Quản lý lịch trình khám bệnh",
             "manage-patient": "Quản lý bệnh nhân khám bệnh"
         }
     },
@@ -54,7 +55,9 @@
         "role":"Vai trò",
         "save":"Lưu user",
         "image":"Ảnh đại diện",
-        "edit":"Lưu thay đổi"
+        "edit":"Lưu thay đổi",
+        "create-user": "Tạo mới người dùng",
+        "load-img": "Tải ảnh"
     },
     "homepage" : {
         "outstanding-doctor" : "Bác sĩ nổi bật tuần qua",
@@ -64,7 +67,7 @@
         "handbook":"Cẩm nang"
     },
     "manage-schedule": {
-        "title" : "Quản lý kế hoạch khám bệnh của bác sĩ",
+        "title" : "Quản lý lịch trình khám bệnh của bác sĩ",
         "choose-doctor": "Chọn bác sĩ",
         "choose-date":"Chọn ngày",
         "save": "Lưu thông tin"
@@ -101,7 +104,7 @@
     "system": {
         "admin" : {
             "manage-doctor" : {
-                "title" : "Tạo Thêm Thông Tin Doctors",
+                "title" : "Tạo Thêm Thông Tin Bác Sĩ",
                 "select-doctor" : "Chọn bác sĩ",
                 "intro": "Thông tin giới thiệu:",
                 "add" : "Tạo thông tin",

@@ -39,12 +39,13 @@ class HomeHeader extends Component {
     return result;
   }
   async componentDidUpdate(prevProps, prevState, snapshot) {
-    let { language } = this.props;
-    if (this.props.language !== prevProps.language) {
-
+    if (prevProps.language !== this.props.language) {
+      if (this.props.language === LANGUAGES.VI) {
+        this.props.changeLanguageAppRedux(LANGUAGES.VI)
+      } else {
+        this.props.changeLanguageAppRedux(LANGUAGES.EN)
+      }
     }
-
-
   }
   changeLanguage = (language) => {
     this.props.changeLanguageAppRedux(language);

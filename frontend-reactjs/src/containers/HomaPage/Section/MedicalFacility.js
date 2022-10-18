@@ -21,10 +21,25 @@ class MedicalFacility extends Component {
       })
     }
   }
+  async componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevState.dataClinics !== this.state.dataClinics) {
+      let res = await getTopClinicHomeService(10);
+      if (res && res.errCode === 0) {
+        this.setState({
+          dataClinics: res.data ? res.data : []
+        })
+      }
+    }
+  }
 
   handleViewDetailClinic = (clinic) => {
     if (this.props.history) {
       this.props.history.push(`/detail-clinic/${clinic.id}`);
+    }
+  }
+  handleMoreClinic = () => {
+    if (this.props.history) {
+      this.props.history.push(`/more-clinic/`);
     }
   }
   render() {
@@ -37,7 +52,7 @@ class MedicalFacility extends Component {
             <span className="title-section">
               <FormattedMessage id="homepage.outstanding-medical-facility" />
             </span>
-            <button className="btn-section">
+            <button className="btn-section" onClick={() => this.handleMoreClinic()}>
               <FormattedMessage id="homepage.more-infor" />
             </button>
           </div>

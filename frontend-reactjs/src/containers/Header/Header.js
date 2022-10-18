@@ -34,6 +34,15 @@ class Header extends Component {
       menuApp: menu
     })
   }
+  async componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.language !== this.props.language) {
+      if (this.props.language === LANGUAGES.VI) {
+        this.props.changeLanguageAppRedux(LANGUAGES.VI)
+      } else {
+        this.props.changeLanguageAppRedux(LANGUAGES.EN)
+      }
+    }
+  }
   render() {
     const { processLogout, language, userInfo } = this.props;
     return (

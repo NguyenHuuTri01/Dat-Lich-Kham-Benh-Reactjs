@@ -21,9 +21,24 @@ class Specialty extends Component {
       })
     }
   }
+  async componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevState.dataSpecialty !== this.state.dataSpecialty) {
+      let res = await getAllSpecialty();
+      if (res && res.errCode === 0) {
+        this.setState({
+          dataSpecialty: res.data ? res.data : []
+        })
+      }
+    }
+  }
   handleViewDetailSpecialty = (item) => {
     if (this.props.history) {
       this.props.history.push(`/detail-specialty/${item.id}`);
+    }
+  }
+  handleMoreSpecialty = () => {
+    if (this.props.history) {
+      this.props.history.push(`/more-specialty/`);
     }
   }
   render() {
@@ -37,7 +52,7 @@ class Specialty extends Component {
             >
               <FormattedMessage id="homepage.specialty-popular" />
             </span>
-            <button className="btn-section">
+            <button className="btn-section" onClick={() => this.handleMoreSpecialty()}>
               <FormattedMessage id="homepage.more-infor" />
             </button>
           </div>

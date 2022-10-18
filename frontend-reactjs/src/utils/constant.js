@@ -8,7 +8,10 @@ export const path = {
   DETAIL_SPECIALTY: "/detail-specialty/:id",
   DETAIL_HANDBOOK: "/detail-handbook/:id",
   DETAIL_CLINIC: "/detail-clinic/:id",
-
+  MORE_SPECIALTY: "/more-specialty",
+  MORE_CLINIC: "/more-clinic",
+  MORE_DOCTOR: "/more-doctor",
+  MORE_HANDBOOK: "/more-handbook",
   VERIFY_EMAIL_BOOKING: "/verify-booking"
 };
 
