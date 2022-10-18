@@ -60,6 +60,7 @@ let handleEditHandBook = (data) => {
                 || !data.descriptionHTML
                 || !data.descriptionMarkdown
                 || !data.imageBase64
+                || !data.id
             ) {
                 resolve({
                     errCode: 2,

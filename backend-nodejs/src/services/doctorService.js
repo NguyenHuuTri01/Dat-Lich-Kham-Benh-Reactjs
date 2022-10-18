@@ -233,6 +233,19 @@ let bulkCreateSchedule = (data) => {
           attributes: ['timeType', 'date', 'doctorId', 'maxNumber'],
           raw: true
         });
+        // delete -> create = update
+        let toDelete = _.differenceWith(data.allScheduleTime, data.arrSchedule, (a, b) => {
+          return a.keyMap === b.timeType
+        })
+        for (let i = 0; i < toDelete.length; i++) {
+          await db.Schedule.destroy({
+            where: {
+              timeType: toDelete[i].keyMap,
+              date: data.arrSchedule[0].date,
+              doctorId: data.arrSchedule[0].doctorId
+            },
+          });
+        }
         //compare different
         let toCreate = _.differenceWith(schedule, existing, (a, b) => {
           return a.timeType === b.timeType && + a.date === + b.date;

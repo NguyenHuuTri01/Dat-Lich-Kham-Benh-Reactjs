@@ -20,14 +20,14 @@ let postBookAppointment = (data) => {
             } else {
                 let token = uuidv4();
 
-                // await emailService.sendSimpleEmail({
-                //     reciverEmail: data.email,
-                //     patientName: data.fullName,
-                //     time: data.timeString,
-                //     doctorName: data.doctorName,
-                //     language: data.language,
-                //     redirectLink: buildUrlEmail(data.doctorId, token)
-                // })
+                await emailService.sendSimpleEmail({
+                    reciverEmail: data.email,
+                    patientName: data.fullName,
+                    time: data.timeString,
+                    doctorName: data.doctorName,
+                    language: data.language,
+                    redirectLink: buildUrlEmail(data.doctorId, token)
+                })
 
                 // upsert patient
                 let user = await db.User.findOrCreate({
