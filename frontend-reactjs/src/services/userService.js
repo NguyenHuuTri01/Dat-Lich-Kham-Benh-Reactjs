@@ -63,6 +63,9 @@ const postVerifyBookAppointment = (data) => {
 const createNewSpecialty = (data) => {
   return axios.post('/api/create-new-specialty', data)
 }
+const getAllSpecialty = () => {
+  return axios.get(`/api/get-all-specialty`);
+}
 const getTopSpecialty = () => {
   return axios.get(`/api/get-top-specialty`);
 }
@@ -141,5 +144,6 @@ export {
   createNewHandBook,
   editHandBook,
   deleteHandBook,
-  getDetailHandBookById
+  getDetailHandBookById,
+  getAllSpecialty
 };
