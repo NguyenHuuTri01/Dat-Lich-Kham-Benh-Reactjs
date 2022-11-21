@@ -1,9 +1,22 @@
 import db from "../models/index";
 require('dotenv').config();
 import _, { reject } from "lodash";
-import emailService from '../services/emailService'
+import emailService from '../services/emailService';
+import bcrypt from "bcryptjs";
 
 const MAX_NUMBER_SCHEDULE = process.env.MAX_NUMBER_SCHEDULE;
+const salt = bcrypt.genSaltSync(10);
+
+let hashPassword = (password) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let hashPassword = await bcrypt.hashSync(password, salt);
+      resolve(hashPassword);
+    } catch (e) {
+      reject(e);
+    }
+  });
+};
 
 let getTopDoctorHome = (limit) => {
   return new Promise(async (resolve, reject) => {
@@ -270,9 +283,10 @@ let getScheduleByDate = (doctorId, date) => {
       if (!doctorId || !date) {
         resolve({
           errCode: 1,
-          errMessage: 'Missing required parameters'
+          errMessage: 'Missing parameter'
         })
       } else {
+
         let dataSchedule = await db.Schedule.findAll({
           where: {
             doctorId: doctorId,
@@ -291,6 +305,7 @@ let getScheduleByDate = (doctorId, date) => {
           data: dataSchedule
         })
       }
+
     } catch (e) {
       reject(e);
     }
@@ -464,6 +479,52 @@ let sendRemedy = (data) => {
     }
   })
 }
+let changePassword = (data) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      if (!data.password || !data.newPassword || !data.confirmPassword) {
+        resolve({
+          errCode: 1,
+          errMessage: 'Missing required parameters'
+        })
+      } else {
+        let res = await db.User.findOne({
+          where: {
+            id: data.userId
+          },
+          raw: false
+        })
+
+        if (res) {
+          let check = bcrypt.compareSync(data.password, res.password);
+          if (check) {
+            if (data.newPassword === data.confirmPassword) {
+              let hashNewPassword = await hashPassword(data.newPassword);
+              res.password = hashNewPassword;
+              await res.save();
+              resolve({
+                errCode: 0,
+                errMessage: 'Change password success'
+              })
+            } else {
+              resolve({
+                errCode: -2,
+                errMessage: 'Confirm password failed'
+              })
+            }
+          } else {
+            resolve({
+              errCode: -1,
+              errMessage: 'Wrong password'
+            })
+          }
+        }
+      }
+    } catch (e) {
+      reject(e);
+    }
+  })
+}
 module.exports = {
   getTopDoctorHome: getTopDoctorHome,
   getAllDoctors: getAllDoctors,
@@ -475,4 +536,5 @@ module.exports = {
   getProfileDoctorById: getProfileDoctorById,
   getListPatientForDoctor: getListPatientForDoctor,
   sendRemedy: sendRemedy,
+  changePassword: changePassword,
 };

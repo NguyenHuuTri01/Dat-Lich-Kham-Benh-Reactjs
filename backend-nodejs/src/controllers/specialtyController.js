@@ -14,9 +14,9 @@ let createSpecialty = async (req, res) => {
         })
     }
 }
-let getAllSpecialty = async (req, res) => {
+let getTopSpecialty = async (req, res) => {
     try {
-        let infor = await specialtyService.getAllSpecialty();
+        let infor = await specialtyService.getTopSpecialty();
         return res.status(200).json(
             infor
         )
@@ -44,6 +44,6 @@ let getDetailSpecialtyById = async (req, res) => {
 }
 module.exports = {
     createSpecialty: createSpecialty,
-    getAllSpecialty: getAllSpecialty,
+    getTopSpecialty: getTopSpecialty,
     getDetailSpecialtyById: getDetailSpecialtyById,
 }
