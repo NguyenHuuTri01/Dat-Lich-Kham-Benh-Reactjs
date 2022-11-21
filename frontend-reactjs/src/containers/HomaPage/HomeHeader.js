@@ -6,7 +6,7 @@ import { LANGUAGES } from "../../utils";
 import { changeLanguageApp } from "../../store/actions";
 import { withRouter } from 'react-router';
 import Select from 'react-select';
-import { getAllSpecialty } from '../../services/userService'
+import { getTopSpecialty } from '../../services/userService'
 
 
 class HomeHeader extends Component {
@@ -19,7 +19,7 @@ class HomeHeader extends Component {
   }
   async componentDidMount() {
 
-    let res = await getAllSpecialty();
+    let res = await getTopSpecialty();
     if (res && res.errCode === 0) {
       this.setState({
         listSpecialty: this.buildDataInputSelect(res.data)
@@ -67,7 +67,7 @@ class HomeHeader extends Component {
         <div className="home-header-container">
           <div className="home-header-content">
             <div className="left-content">
-              <i className="fas fa-bars"></i>
+              {/* <i className="fas fa-bars"></i> */}
               <div className="header-logo" onClick={() => this.returnToHome()}></div>
             </div>
             <div className="center-content">

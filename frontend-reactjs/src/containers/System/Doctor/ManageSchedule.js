@@ -176,6 +176,7 @@ class ManageSchedule extends Component {
             // get all schedule doctor
             let formatedDate = new Date(currentDate).getTime();
             let res = await getScheduleDoctorByDate(selectedDoctor.value, formatedDate);
+            console.log('chjeck res: ', res)
             if (res && res.errCode === 0) {
                 this.setState({
                     allSchedule: res.data

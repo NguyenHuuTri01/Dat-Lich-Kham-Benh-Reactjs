@@ -10,10 +10,6 @@ export const adminMenu = [
         name: "menu.admin.crud-redux",
         link: "/system/create-new-user",
       },
-      { //Đổi mật khẩu
-        name: "menu.admin.change-password",
-        link: "/system/change-password",
-      },
       {
         name: "menu.admin.manage-doctor",
         link: "/system/manage-doctor",
@@ -79,6 +75,10 @@ export const doctorMenu = [
       {//quản lý bệnh nhân khám bệnh của bác sĩ
         name: "menu.doctor.manage-patient",
         link: "/doctor/manage-patient",
+      },
+      { //Đổi mật khẩu
+        name: "menu.admin.change-password",
+        link: "/system/change-password",
       },
     ]
   }

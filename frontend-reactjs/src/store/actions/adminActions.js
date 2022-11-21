@@ -8,7 +8,7 @@ import {
   getTopDoctorHomeService,
   getAllDoctors,
   saveDetailDoctorService,
-  getAllSpecialty,
+  getTopSpecialty,
   getAllClinic
 } from "../../services/userService";
 import { toast } from "react-toastify";
@@ -300,7 +300,7 @@ export const getRequireDoctorInfor = () => {
       let resPrice = await getAllCodeService("PRICE");
       let resPayment = await getAllCodeService("PAYMENT");
       let resProvince = await getAllCodeService("PROVINCE");
-      let resSpecialty = await getAllSpecialty();
+      let resSpecialty = await getTopSpecialty();
       let resClinic = await getAllClinic();
 
       if (resPrice && resPrice.errCode === 0

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Slider from "react-slick";
 import { FormattedMessage } from "react-intl";
 import './Specialty.scss';
-import { getAllSpecialty } from '../../../services/userService';
+import { getTopSpecialty } from '../../../services/userService';
 import { withRouter } from 'react-router';
 
 class Specialty extends Component {
@@ -14,7 +14,7 @@ class Specialty extends Component {
     }
   }
   async componentDidMount() {
-    let res = await getAllSpecialty();
+    let res = await getTopSpecialty();
     if (res && res.errCode === 0) {
       this.setState({
         dataSpecialty: res.data ? res.data : []
@@ -23,7 +23,7 @@ class Specialty extends Component {
   }
   async componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevState.dataSpecialty !== this.state.dataSpecialty) {
-      let res = await getAllSpecialty();
+      let res = await getTopSpecialty();
       if (res && res.errCode === 0) {
         this.setState({
           dataSpecialty: res.data ? res.data : []

@@ -10,6 +10,10 @@ const createNewUserService = (data) => {
   return axios.post("/api/create-new-user", data);
 };
 
+const changePassword = (data) => {
+  return axios.put("/api/change-password", data);
+};
+
 const deleteUserService = (userId) => {
   return axios.delete("/api/delete-user", {
     data: {
@@ -59,8 +63,8 @@ const postVerifyBookAppointment = (data) => {
 const createNewSpecialty = (data) => {
   return axios.post('/api/create-new-specialty', data)
 }
-const getAllSpecialty = () => {
-  return axios.get(`/api/get-all-specialty`);
+const getTopSpecialty = () => {
+  return axios.get(`/api/get-top-specialty`);
 }
 const getDetailSpecialtyById = (data) => {
   return axios.get(`/api/get-detail-specialty-by-id?id=${data.id}&location=${data.location}`);
@@ -110,6 +114,7 @@ export {
   handleLoginApi,
   getAllUsers,
   createNewUserService,
+  changePassword,
   deleteUserService,
   editUserService,
   getAllCodeService,
@@ -124,7 +129,7 @@ export {
   postPatientBookAppointment,
   postVerifyBookAppointment,
   createNewSpecialty,
-  getAllSpecialty,
+  getTopSpecialty,
   getDetailSpecialtyById,
   createNewClinic,
   getAllClinic,

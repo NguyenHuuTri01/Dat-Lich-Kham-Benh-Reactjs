@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import './ChangePassword.scss';
+import { changePassword } from '../../../services/userService';
 
 class ChangePassword extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            password: '',
+            newPassword: '',
+            confirmPassword: ''
         }
     }
     async componentDidMount() {
@@ -18,6 +22,31 @@ class ChangePassword extends Component {
         }
 
     }
+    handleOnChangeInput = (event, id) => {
+        let stateCopy = { ...this.state };
+        stateCopy[id] = event.target.value;
+        this.setState({
+            ...stateCopy
+        })
+    }
+    handleOnChangePassword = async () => {
+        let res = await changePassword({
+            password: this.state.password,
+            newPassword: this.state.newPassword,
+            confirmPassword: this.state.confirmPassword,
+            userId: this.props.user.id
+        });
+        if (res && res.errCode === 0) {
+            alert(res.errMessage);
+            this.setState({
+                password: '',
+                newPassword: '',
+                confirmPassword: '',
+            })
+        } else {
+            alert(res.errMessage)
+        }
+    }
     render() {
         return (
             <div className="change-password-body">
@@ -26,18 +55,40 @@ class ChangePassword extends Component {
                         <div className="change-password-content">
                             <h1>Đổi Mật Khẩu</h1>
                             <div className="group">
-                                <input type="password" className="inputText" placeholder=" " required />
+                                <input
+                                    type="password"
+                                    value={this.state.password}
+                                    onChange={(event) => this.handleOnChangeInput(event, 'password')}
+                                    className="inputText"
+                                    placeholder=" "
+                                    required
+                                />
                                 <label>Password</label>
                             </div>
                             <div className="group">
-                                <input type="password" className="inputText" placeholder=" " required />
+                                <input
+                                    type="password"
+                                    value={this.state.newPassword}
+                                    onChange={(event) => this.handleOnChangeInput(event, 'newPassword')}
+                                    className="inputText"
+                                    placeholder=" "
+                                    required />
                                 <label>New Password</label>
                             </div>
                             <div className="group">
-                                <input type="password" className="inputText" placeholder=" " required />
+                                <input
+                                    type="password"
+                                    value={this.state.confirmPassword}
+                                    onChange={(event) => this.handleOnChangeInput(event, 'confirmPassword')}
+                                    className="inputText"
+                                    placeholder=" "
+                                    required />
                                 <label>Confirm Password</label>
                             </div>
-                            <button className="btn-save">Save</button>
+                            <button
+                                className="btn-save"
+                                onClick={() => this.handleOnChangePassword()}
+                            >Save</button>
                         </div>
                     </div>
                 </div>
@@ -49,6 +100,7 @@ class ChangePassword extends Component {
 const mapStateToProps = (state) => {
     return {
         language: state.app.language,
+        user: state.user.userInfo
     };
 };
 
