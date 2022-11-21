@@ -30,6 +30,30 @@ let createSpecialty = (data) => {
         }
     })
 }
+let getAllSpecialty = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let data = await db.Specialty.findAll(
+                {
+                    attributes: ['id', 'image', 'name']
+                }
+            );
+            if (data && data.length > 0) {
+                data.map(item => {
+                    item.image = new Buffer.from(item.image, "base64").toString("binary");
+                    return item;
+                })
+            }
+            resolve({
+                errCode: 0,
+                errMessage: 'Ok',
+                data
+            })
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
 let getTopSpecialty = (limit) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -106,6 +130,7 @@ let getDetailSpecialtyById = (inputId, location) => {
 }
 module.exports = {
     createSpecialty: createSpecialty,
+    getAllSpecialty: getAllSpecialty,
     getTopSpecialty: getTopSpecialty,
     getDetailSpecialtyById: getDetailSpecialtyById,
 }
