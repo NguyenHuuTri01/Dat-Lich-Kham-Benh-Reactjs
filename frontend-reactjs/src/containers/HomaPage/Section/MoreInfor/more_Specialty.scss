@@ -1,17 +1,29 @@
 .search-specialty {
-    display        : flex;
-    justify-content: center;
-    align-items    : center;
-    margin-bottom  : 50px;
+    width           : 100%;
+    display         : flex;
+    justify-content : center;
+    align-items     : center;
+    position        : fixed;
+    z-index         : 5;
+    background-color: white;
 
     .search-specialty-containter {
-        border       : 1px solid green;
-        padding      : 5px;
-        border-radius: 5px;
-        position     : sticky !important;
+        border       : 2px solid #0096FF;
+        border-radius: 15px;
+        position     : relative;
+        width        : 20%;
+        padding      : 5px 0px 5px 20px;
+
+        &:focus-within {
+            border: 2px solid #00D7FF;
+
+            i {
+                color: #00D7FF;
+            }
+        }
 
         input {
-            width      : 200px;
+            width      : 250px;
             border     : none;
             outline    : none;
             margin-left: 5px;
@@ -19,35 +31,40 @@
 
         i {
             font-size: 20px;
+            color    : #0096FF;
         }
     }
 }
 
-.all-item-specialty {
-    display       : flex;
-    margin-top    : 10px;
-    padding-left  : 30px;
-    padding-top   : 10px;
-    padding-bottom: 10px;
+.all-specialty {
+    margin-top: 50px;
 
-    &:hover {
-        background-color: #D6E4E5;
-        cursor          : pointer;
-    }
+    .all-item-specialty {
+        display       : flex;
+        margin-top    : 10px;
+        padding-left  : 30px;
+        padding-top   : 10px;
+        padding-bottom: 10px;
 
-    .img-specialty {
-        height             : 150px;
-        width              : 278px;
-        background-position: center center;
-        background-repeat  : no-repeat;
-        background-size    : cover;
-        background-color   : #eee;
-    }
+        &:hover {
+            background-color: #D6E4E5;
+            cursor          : pointer;
+        }
 
-    .name-specialty {
-        display    : flex;
-        align-items: center;
-        font-size  : 20px;
-        margin-left: 20px;
+        .img-specialty {
+            height             : 150px;
+            width              : 278px;
+            background-position: center center;
+            background-repeat  : no-repeat;
+            background-size    : cover;
+            background-color   : #eee;
+        }
+
+        .name-specialty {
+            display    : flex;
+            align-items: center;
+            font-size  : 20px;
+            margin-left: 20px;
+        }
     }
 }

@@ -79,13 +79,6 @@ class DoctorSchedule extends Component {
                 allAvalableTime: res.data ? res.data : []
             })
         }
-        if (this.state.allAvalableTime !== prevState.allAvalableTime) {
-            let allDays = this.getArrDays(this.props.language);
-            let res = await getScheduleDoctorByDate(this.props.doctorIdFromParent, allDays[0].value)
-            this.setState({
-                allAvalableTime: res.data ? res.data : []
-            })
-        }
     }
     handleOnChangeSelect = async (event) => {
         if (this.props.doctorIdFromParent && this.props.doctorIdFromParent !== -1) {

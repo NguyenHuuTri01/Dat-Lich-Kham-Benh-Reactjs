@@ -10,7 +10,8 @@ class more_Specialty extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            arrSpecialty: []
+            arrSpecialty: [],
+            searchTerm: ''
         }
     }
     async componentDidMount() {
@@ -26,48 +27,55 @@ class more_Specialty extends Component {
         if (this.props.language !== prevProps.language) {
 
         }
-        if (prevState.arrSpecialty !== this.state.arrSpecialty) {
-            let res = await getAllSpecialty();
-            if (res && res.errCode === 0) {
-                this.setState({
-                    arrSpecialty: res.data
-                })
-            }
-        }
     }
     handleViewSpecialty = (idSpecialty) => {
         if (this.props.history) {
             this.props.history.push(`/detail-specialty/${idSpecialty}`);
         }
     }
+    handleChangeSearch = (event) => {
+        this.setState({
+            searchTerm: event.target.value
+        })
+    }
     render() {
-        let { arrSpecialty } = this.state;
+        let { arrSpecialty, searchTerm } = this.state;
         return (
             <>
                 <HomeHeader />
                 <div className="search-specialty">
                     <div className="search-specialty-containter">
                         <i className="fas fa-search"></i>
-                        <input />
+                        <input
+                            placeholder="Search specialty..."
+                            onChange={(event) => this.handleChangeSearch(event)}
+                        />
                     </div>
                 </div>
-                <div>
+                <div className="all-specialty">
                     {
-                        arrSpecialty.map((item, index) => {
-                            return (
-                                <div
-                                    className="all-item-specialty"
-                                    onClick={() => this.handleViewSpecialty(item.id)}
-                                >
+                        arrSpecialty && arrSpecialty.length > 0 &&
+                        arrSpecialty.filter((item) => {
+                            return searchTerm.toLowerCase() === '' ?
+                                item : item.name.toLowerCase().includes(searchTerm.toLowerCase());
+                        }
+                        )
+                            .map((item) => {
+                                return (
                                     <div
-                                        className="img-specialty"
-                                        style={{ backgroundImage: `url(${item.image})` }}
+                                        className="all-item-specialty"
+                                        onClick={() => this.handleViewSpecialty(item.id)}
+                                        key={item.id}
                                     >
+                                        <div
+                                            className="img-specialty"
+                                            style={{ backgroundImage: `url(${item.image})` }}
+                                        >
+                                        </div>
+                                        <div className="name-specialty">{item.name}</div>
                                     </div>
-                                    <div className="name-specialty">{item.name}</div>
-                                </div>
-                            )
-                        })}
+                                )
+                            })}
                 </div>
             </>
         );

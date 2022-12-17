@@ -1,0 +1,80 @@
+.search-clinic {
+    width           : 100%;
+    display         : flex;
+    justify-content : center;
+    align-items     : center;
+    position        : fixed;
+    z-index         : 5;
+    background-color: white;
+
+    .search-clinic-containter {
+        border       : 2px solid #0096FF;
+        border-radius: 15px;
+        position     : relative;
+        width        : 20%;
+        padding      : 5px 0px 5px 20px;
+
+        &:focus-within {
+            border: 2px solid #00D7FF;
+
+            i {
+                color: #00D7FF;
+            }
+        }
+
+        input {
+            width      : 250px;
+            border     : none;
+            outline    : none;
+            margin-left: 5px;
+        }
+
+        i {
+            font-size: 20px;
+            color    : #0096FF;
+        }
+    }
+}
+
+.all-clinic {
+    margin-top: 50px;
+
+    .all-item-clinic {
+        display       : flex;
+        width         : 100%;
+        cursor        : pointer;
+        margin-top    : 10px;
+        padding-left  : 30px;
+        padding-top   : 10px;
+        padding-bottom: 10px;
+        align-items   : center;
+
+        &:hover {
+            background-color: #D6E4E5;
+            cursor          : pointer;
+        }
+
+        .img-clinic {
+            height             : 150px;
+            width              : 20%;
+            background-position: center center;
+            background-repeat  : no-repeat;
+            background-size    : cover;
+            background-color   : #eee;
+        }
+
+        .detail-clinic {
+            width       : 80%;
+            padding-left: 30px;
+
+            .name-clinic {
+                font-size    : 20px;
+                margin-bottom: 10px;
+            }
+
+            .address-clinic {
+                max-width: 900px;
+            }
+        }
+    }
+}
