@@ -59,9 +59,17 @@ let getAllDoctors = () => {
       let doctors = await db.User.findAll({
         where: { roleId: 'R2' },
         attributes: {
-          exclude: ["password", 'image'],
+          exclude: ["password"],
         }
       })
+
+      if (doctors && doctors.length > 0) {
+        doctors.map(item => {
+          item.image = new Buffer.from(item.image, "base64").toString("binary");
+          return item;
+        })
+      }
+      if (!doctors) doctors = {}
       resolve({
         errCode: 0,
         data: doctors
