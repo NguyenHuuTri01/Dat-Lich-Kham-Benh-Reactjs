@@ -156,7 +156,7 @@ class ManageHandBook extends Component {
                     </div>
                     <div className="col-12">
                         <MdEditor
-                            style={{ height: "300px" }}
+                            style={{ height: "400px" }}
                             renderHTML={(text) => mdParser.render(text)}
                             onChange={this.handleEditorChange}
                             value={this.state.descriptionMarkdown}

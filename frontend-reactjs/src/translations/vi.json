@@ -39,7 +39,8 @@
         },
         "doctor": {
             "manage-schedule": "Quản lý lịch trình khám bệnh",
-            "manage-patient": "Quản lý bệnh nhân khám bệnh"
+            "manage-patient": "Quản lý bệnh nhân khám bệnh",
+            "manage-infomation": "Quản lý thông tin cá nhân"
         }
     },
     "manage-user" :{
@@ -75,7 +76,7 @@
     "patient" : {
         "detail-doctor" : {
             "schedule": "Lịch Khám",
-            "no-schedule": "Bác Sĩ không có lịch hẹn trong thời gian này, vui lòng chọn thời gian khác!",
+            "no-schedule": "Bác Sĩ không có lịch trong thời gian này, vui lòng chọn thời gian khác!",
             "choose" : "Chọn ",
             "book-free" : " và đặt (miễn phí)"
         },

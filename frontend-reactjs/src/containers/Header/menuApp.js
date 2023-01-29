@@ -31,7 +31,11 @@ export const adminMenu = [
       { //quản lý kế hoạch khám bệnh của bác sĩ
         name: "menu.doctor.manage-schedule",
         link: "/doctor/manage-schedule",
-      }
+      },
+      { //Đổi mật khẩu
+        name: "menu.admin.change-password",
+        link: "/system/change-password",
+      },
     ],
   },
   {//quản lý phòng khám
@@ -71,6 +75,10 @@ export const doctorMenu = [
       {//quản lý kế hoạch khám bệnh của bác sĩ
         name: "menu.doctor.manage-schedule",
         link: "/doctor/manage-schedule",
+      },
+      {//Chỉnh sửa thông tin
+        name: "menu.doctor.manage-infomation",
+        link: "/system/manage-doctor",
       },
       {//quản lý bệnh nhân khám bệnh của bác sĩ
         name: "menu.doctor.manage-patient",

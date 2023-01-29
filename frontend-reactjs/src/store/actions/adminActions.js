@@ -101,9 +101,15 @@ export const createNewUser = (data) => {
         toast.success("Create a new user succeed!");
         dispatch(saveUserSuccess());
         dispatch(fetchAllUsersStart());
-      } else {
-        dispatch(saveUserFailed());
-      }
+      } else
+        if (res && res.errCode === 1) {
+          alert("Your email is already in use, please try another email !!!");
+          dispatch(saveUserFailed());
+        }
+        else {
+          toast.error("Fetch all users error!");
+          dispatch(saveUserFailed());
+        }
     } catch (e) {
       dispatch(saveUserFailed());
       console.log("fetchRoleFailed error", e);

@@ -14,12 +14,6 @@ class OutStandingDoctor extends Component {
     };
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (prevProps.topDoctorsRedux !== this.props.topDoctorsRedux) {
-      this.setState({
-        arrDoctors: this.props.topDoctorsRedux,
-      });
-      this.props.loadTopDoctors();
-    }
   }
   componentDidMount() {
     this.props.loadTopDoctors();
@@ -35,8 +29,9 @@ class OutStandingDoctor extends Component {
     }
   }
   render() {
-    let arrDoctors = this.state.arrDoctors;
+    let arrDoctors = this.props.topDoctorsRedux;
     let { language } = this.props;
+    console.log("check")
     return (
       <div className="section-share section-outstanding-doctor">
         <div className="section-container">
