@@ -35,7 +35,7 @@ let getAllSpecialty = () => {
         try {
             let data = await db.Specialty.findAll(
                 {
-                    attributes: ['id', 'image', 'name']
+                    order: [["createdAt", "DESC"]],
                 }
             );
             if (data && data.length > 0) {
@@ -128,9 +128,77 @@ let getDetailSpecialtyById = (inputId, location) => {
         }
     })
 }
+let handleEditSpecialty = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!data.name
+                || !data.descriptionHTML
+                || !data.descriptionMarkdown
+                || !data.imageBase64
+                || !data.id
+            ) {
+                resolve({
+                    errCode: 2,
+                    errMessage: "Missing require parameters",
+                });
+                return;
+            }
+            let specialty = await db.Specialty.findOne({
+                where: { id: data.id },
+                raw: false,
+            });
+            if (specialty) {
+                specialty.name = data.name;
+                specialty.image = data.imageBase64;
+                specialty.descriptionHTML = data.descriptionHTML;
+                specialty.descriptionMarkdown = data.descriptionMarkdown;
+                await specialty.save();
+                resolve({
+                    errCode: 0,
+                    message: "Update the specialty succeeds!",
+                });
+            } else {
+                resolve({
+                    errCode: 1,
+                    errMessage: `Specialty's not found!`,
+                });
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+let handleDelelteSpecialty = (inputId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let specialty = await db.Specialty.findOne({
+                where: { id: inputId },
+            });
+            if (!specialty) {
+                resolve({
+                    errCode: 2,
+                    errMessage: `The specialty isn't exists`,
+                });
+            }
+            await db.Specialty.destroy({
+                where: { id: inputId },
+            });
+            resolve({
+                errCode: 0,
+                message: "The specialty is deleted",
+            });
+
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
 module.exports = {
     createSpecialty: createSpecialty,
     getAllSpecialty: getAllSpecialty,
     getTopSpecialty: getTopSpecialty,
     getDetailSpecialtyById: getDetailSpecialtyById,
+    handleEditSpecialty: handleEditSpecialty,
+    handleDelelteSpecialty: handleDelelteSpecialty,
 }

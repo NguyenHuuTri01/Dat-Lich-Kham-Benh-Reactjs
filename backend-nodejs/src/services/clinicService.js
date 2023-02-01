@@ -34,7 +34,11 @@ let createClinic = (data) => {
 let getAllClinic = () => {
     return new Promise(async (resolve, reject) => {
         try {
-            let data = await db.Clinic.findAll();
+            let data = await db.Clinic.findAll(
+                {
+                    order: [["createdAt", "DESC"]],
+                }
+            );
             if (data && data.length > 0) {
                 data.map(item => {
                     item.image = new Buffer(item.image, "base64").toString("binary");
@@ -111,10 +115,78 @@ let getDetailClinicById = (inputId) => {
         }
     })
 }
+let handleEditClinic = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!data.name
+                || !data.address
+                || !data.descriptionHTML
+                || !data.descriptionMarkdown
+                || !data.imageBase64
+                || !data.id
+            ) {
+                resolve({
+                    errCode: 2,
+                    errMessage: "Missing require parameters",
+                });
+                return;
+            }
+            let clinic = await db.Clinic.findOne({
+                where: { id: data.id },
+                raw: false,
+            });
+            if (clinic) {
+                clinic.name = data.name;
+                clinic.address = data.address;
+                clinic.image = data.imageBase64;
+                clinic.descriptionHTML = data.descriptionHTML;
+                clinic.descriptionMarkdown = data.descriptionMarkdown;
+                await clinic.save();
+                resolve({
+                    errCode: 0,
+                    message: "Update the clinic succeeds!",
+                });
+            } else {
+                resolve({
+                    errCode: 1,
+                    errMessage: `Clinic's not found!`,
+                });
+            }
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+let handleDelelteClinic = (inputId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let clinic = await db.Clinic.findOne({
+                where: { id: inputId },
+            });
+            if (!clinic) {
+                resolve({
+                    errCode: 2,
+                    errMessage: `The clinic isn't exists`,
+                });
+            }
+            await db.Clinic.destroy({
+                where: { id: inputId },
+            });
+            resolve({
+                errCode: 0,
+                message: "The clinic is deleted",
+            });
 
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
 module.exports = {
     createClinic: createClinic,
     getAllClinic: getAllClinic,
     getDetailClinicById: getDetailClinicById,
     getTopClinicHome: getTopClinicHome,
+    handleEditClinic: handleEditClinic,
+    handleDelelteClinic: handleDelelteClinic,
 }

@@ -66,6 +66,7 @@ let handleEditHandBook = (data) => {
                     errCode: 2,
                     errMessage: "Missing require parameters",
                 });
+                return;
             }
             let handbook = await db.HandBook.findOne({
                 where: { id: data.id },
