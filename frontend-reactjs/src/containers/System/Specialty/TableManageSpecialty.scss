@@ -1,0 +1,29 @@
+#TableManageSpecialty {
+    font-family    : Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width          : 80%;
+    margin-left    : 150px;
+}
+
+#TableManageSpecialty td,
+#TableManageSpecialty th {
+    border : 1px solid #ddd;
+    padding: 8px;
+}
+
+#TableManageSpecialty tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#TableManageSpecialty tr:hover {
+    background-color: #ddd;
+}
+
+#TableManageSpecialty th {
+    padding-top     : 12px;
+    padding-bottom  : 12px;
+    text-align      : center;
+    background-color: #04aa6d;
+    color           : white;
+    width           : 50%;
+}

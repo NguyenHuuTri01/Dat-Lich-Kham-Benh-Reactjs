@@ -1,73 +1,72 @@
 import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
-import "./TableManageHandBook.scss";
-import * as actions from "../../../store/actions";
+import './TableManageSpecialty.scss';
 import "react-markdown-editor-lite/lib/index.css";
-import { getAllHandBook, deleteHandBook } from "../../../services/userService";
+import { getAllSpecialty, deleteSpecialty } from "../../../services/userService";
 import { toast } from 'react-toastify';
 
-class TableManageHandBook extends Component {
+class TableManageSpecialty extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            listHandBook: {},
-            title: '',
+            listSpecialty: {},
         };
     }
     async componentDidMount() {
-        this.updateListHandBook();
+        this.updateListSpecialty();
     }
     async componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.updatelist) {
-            this.updateListHandBook();
+        let { updatelist } = this.props;
+        if (updatelist) {
+            this.updateListSpecialty();
             this.props.handleUnUpdateList();
         }
     }
-    updateListHandBook = async () => {
-        let list = await getAllHandBook();
+    updateListSpecialty = async () => {
+        let list = await getAllSpecialty();
         if (list && list.errCode === 0) {
             this.setState({
-                listHandBook: list,
+                listSpecialty: list
             })
         }
     }
-    handleDeleteHandBook = async (item) => {
-        let res = await deleteHandBook(item.id);
+    handleDeleteSpecialty = async (item) => {
+        let res = await deleteSpecialty(item.id);
         if (res && res.errCode === 0) {
-            toast.success('Delete handbook is success!');
-            this.updateListHandBook();
+            toast.success('Delete Specialty is success!');
+            this.updateListSpecialty();
         }
     };
-    handleEditHandBook = (item) => {
-        this.props.handleEditHandBookFromParent(item);
+    handleEditSpecialty = (item) => {
+        this.props.handleEditSpecialtyFromParent(item);
     };
     render() {
-        let { listHandBook } = this.state;
+        let { listSpecialty } = this.state;
         return (
             <React.Fragment>
-                <table id="TableManageHandBook">
+                <table id="TableManageSpecialty">
                     <tbody>
                         <tr>
-                            <th>Title</th>
+                            <th>Tên Phòng Khám</th>
                             <th>Actions</th>
                         </tr>
-                        {listHandBook && listHandBook.data &&
-                            listHandBook.data.length > 0 &&
-                            listHandBook.data.map((item, index) => {
+                        {listSpecialty && listSpecialty.data &&
+                            listSpecialty.data.length > 0 &&
+                            listSpecialty.data.map((item, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td>{item.title}</td>
+                                        <td>{item.name}</td>
                                         <td>
                                             <button
                                                 className="btn-edit"
-                                                onClick={() => this.handleEditHandBook(item)}
+                                                onClick={() => this.handleEditSpecialty(item)}
                                             >
                                                 <i className="fas fa-pencil-alt"></i>
                                             </button>
                                             <button
                                                 className="btn-delete"
-                                                onClick={() => this.handleDeleteHandBook(item)}
+                                                onClick={() => this.handleDeleteSpecialty(item)}
                                             >
                                                 <i className="fas fa-trash"></i>
                                             </button>
@@ -92,4 +91,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TableManageHandBook);
+export default connect(mapStateToProps, mapDispatchToProps)(TableManageSpecialty);

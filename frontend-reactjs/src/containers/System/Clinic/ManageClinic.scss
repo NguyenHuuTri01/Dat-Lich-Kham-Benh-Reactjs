@@ -1,7 +1,7 @@
-.manage-specialty-container {
+.manage-clinic-container {
     padding: 0 15px;
 
-    .manage-specialty-title {
+    .manage-clinic-title {
         text-align    : center;
         margin        : 10px 0;
         text-transform: uppercase;
@@ -9,14 +9,54 @@
         font-size     : 20px;
     }
 
-    .add-new-specialty {
-        .btn-save-specialty {
+    .label-upload {
+        padding      : 5px;
+        border-radius: 3px;
+        background   : #ddd;
+        cursor       : pointer;
+
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+
+    .preview-image {
+        height         : 50px;
+        width          : 100%;
+        border         : 1px solid #ddd;
+        background     : center center no-repeat;
+        background-size: contain;
+        cursor         : pointer;
+    }
+
+    .add-new-clinic {
+        .btn-save-clinic {
             border       : none;
             border-radius: 3px;
             padding      : 8px 5px;
-            background   : orange;
             min-width    : 75px;
-            margin       : 15px 0;
+            margin       : 15px 15px;
+            background   : orange;
+            cursor       : pointer;
+
+            &:hover {
+                opacity: 0.9;
+            }
+        }
+
+        .btn-create-clinic {
+            border       : none;
+            border-radius: 3px;
+            padding      : 8px 5px;
+            min-width    : 75px;
+            margin       : 15px 15px;
+            background   : rgb(70, 85, 221);
+            cursor       : pointer;
+            color        : white;
+
+            &:hover {
+                opacity: 0.9;
+            }
         }
     }
 }

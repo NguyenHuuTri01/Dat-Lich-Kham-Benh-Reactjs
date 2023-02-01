@@ -1,73 +1,72 @@
 import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
-import "./TableManageHandBook.scss";
-import * as actions from "../../../store/actions";
+import './TableManageClinic.scss';
 import "react-markdown-editor-lite/lib/index.css";
-import { getAllHandBook, deleteHandBook } from "../../../services/userService";
+import { getAllClinic, deleteClinic } from "../../../services/userService";
 import { toast } from 'react-toastify';
 
-class TableManageHandBook extends Component {
+class TableManageClinic extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            listHandBook: {},
-            title: '',
+            listClinic: {},
         };
     }
     async componentDidMount() {
-        this.updateListHandBook();
+        this.updateListClinic();
     }
     async componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.updatelist) {
-            this.updateListHandBook();
+        let { updatelist } = this.props;
+        if (updatelist) {
+            this.updateListClinic();
             this.props.handleUnUpdateList();
         }
     }
-    updateListHandBook = async () => {
-        let list = await getAllHandBook();
+    updateListClinic = async () => {
+        let list = await getAllClinic();
         if (list && list.errCode === 0) {
             this.setState({
-                listHandBook: list,
+                listClinic: list
             })
         }
     }
-    handleDeleteHandBook = async (item) => {
-        let res = await deleteHandBook(item.id);
+    handleDeleteClinic = async (item) => {
+        let res = await deleteClinic(item.id);
         if (res && res.errCode === 0) {
-            toast.success('Delete handbook is success!');
-            this.updateListHandBook();
+            toast.success('Delete clinic is success!');
+            this.updateListClinic();
         }
     };
-    handleEditHandBook = (item) => {
-        this.props.handleEditHandBookFromParent(item);
+    handleEditClinic = (item) => {
+        this.props.handleEditClinicFromParent(item);
     };
     render() {
-        let { listHandBook } = this.state;
+        let { listClinic } = this.state;
         return (
             <React.Fragment>
-                <table id="TableManageHandBook">
+                <table id="TableManageClinic">
                     <tbody>
                         <tr>
-                            <th>Title</th>
+                            <th>Tên Phòng Khám</th>
                             <th>Actions</th>
                         </tr>
-                        {listHandBook && listHandBook.data &&
-                            listHandBook.data.length > 0 &&
-                            listHandBook.data.map((item, index) => {
+                        {listClinic && listClinic.data &&
+                            listClinic.data.length > 0 &&
+                            listClinic.data.map((item, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td>{item.title}</td>
+                                        <td>{item.name}</td>
                                         <td>
                                             <button
                                                 className="btn-edit"
-                                                onClick={() => this.handleEditHandBook(item)}
+                                                onClick={() => this.handleEditClinic(item)}
                                             >
                                                 <i className="fas fa-pencil-alt"></i>
                                             </button>
                                             <button
                                                 className="btn-delete"
-                                                onClick={() => this.handleDeleteHandBook(item)}
+                                                onClick={() => this.handleDeleteClinic(item)}
                                             >
                                                 <i className="fas fa-trash"></i>
                                             </button>
@@ -92,4 +91,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TableManageHandBook);
+export default connect(mapStateToProps, mapDispatchToProps)(TableManageClinic);

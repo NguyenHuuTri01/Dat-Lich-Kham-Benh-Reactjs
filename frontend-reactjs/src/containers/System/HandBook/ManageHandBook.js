@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
+import * as actions from "../../../store/actions";
 import './ManageHandBook.scss';
 import MarkdownIt from "markdown-it";
 import MdEditor from "react-markdown-editor-lite";
@@ -23,17 +24,18 @@ class ManageHandBook extends Component {
             descriptionMarkdown: '',
             previewImgURL: "",
             isOpen: false,
-            action: CRUD_ACTION.CREATE
+            action: CRUD_ACTION.CREATE,
+            updatelist: false,
         }
     }
     async componentDidMount() {
+
     }
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.language !== prevProps.language) {
 
         }
-
     }
     handleOnChangeInput = (event, id) => {
         let stateCopy = { ...this.state }
@@ -87,6 +89,7 @@ class ManageHandBook extends Component {
                     previewImgURL: '',
                     descriptionHTML: '',
                     descriptionMarkdown: '',
+                    updatelist: true
                 })
             } else {
                 toast.error('Create a new handbook is failed!');
@@ -101,7 +104,8 @@ class ManageHandBook extends Component {
                     previewImgURL: '',
                     descriptionHTML: '',
                     descriptionMarkdown: '',
-                    action: CRUD_ACTION.CREATE
+                    action: CRUD_ACTION.CREATE,
+                    updatelist: true
                 })
             } else {
                 toast.error('Update the handbook is failed!');
@@ -117,7 +121,13 @@ class ManageHandBook extends Component {
             action: CRUD_ACTION.CREATE
         })
     }
+    handleUnUpdateList = () => {
+        this.setState({
+            updatelist: false
+        })
+    }
     render() {
+        let { updatelist } = this.state;
         return (
             <div className="manage-handbook-container">
                 <div className="manage-handbook-title">
@@ -125,7 +135,7 @@ class ManageHandBook extends Component {
                 </div>
                 <div className="add-new-handbook row">
                     <div className="col-6 form-group">
-                        <label>Tiêu đề</label>
+                        <label>Tiêu đề:</label>
                         <input
                             className="form-control"
                             type="text"
@@ -134,7 +144,7 @@ class ManageHandBook extends Component {
                         />
                     </div>
                     <div className="col-6 form-group">
-                        <label>Ảnh minh họa</label>
+                        <label>Ảnh minh họa:</label>
                         <div className="preview-img-container">
                             <input
                                 id="previewImg"
@@ -155,8 +165,9 @@ class ManageHandBook extends Component {
                         </div>
                     </div>
                     <div className="col-12">
+                        <label>Thông tin chi tiết:</label>
                         <MdEditor
-                            style={{ height: "400px" }}
+                            style={{ height: "380px" }}
                             renderHTML={(text) => mdParser.render(text)}
                             onChange={this.handleEditorChange}
                             value={this.state.descriptionMarkdown}
@@ -167,16 +178,18 @@ class ManageHandBook extends Component {
                             className={this.state.action === CRUD_ACTION.CREATE ? "btn-create-handbook" : 'btn-save-handbook'}
                             onClick={() => this.handleSaveNewHandBook()}
                         >
-                            Save
+                            {this.state.action === CRUD_ACTION.CREATE ? "Create" : "Save"}
                         </button>
                         <button className="btn-reload-input"
                             onClick={() => this.handleReloadInput()}
                         >
-                            Reload
+                            Clean
                         </button>
                     </div>
                     <TableManageHandBook
                         handleEditHandBookFromParent={this.handleEditHandBookFromParent}
+                        updatelist={updatelist}
+                        handleUnUpdateList={this.handleUnUpdateList}
                     />
                 </div>
                 {this.state.isOpen === true && (
@@ -198,7 +211,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
     };
 };
 
