@@ -23,7 +23,6 @@ class ManagePatient extends Component {
         }
     }
     async componentDidMount() {
-
         this.getDataPatient();
     }
     getDataPatient = async () => {
@@ -62,8 +61,10 @@ class ManagePatient extends Component {
             patientId: item.patientId,
             email: item.patientData.email,
             timeType: item.timeType,
+            reason: item.reason,
             patientName: item.patientData.firstName
         }
+
         this.setState({
             isOpenRemedyModal: true,
             dataModal: data
@@ -83,6 +84,7 @@ class ManagePatient extends Component {
         let res = await postSendRemedy({
             email: dataChild.email,
             imgBase64: dataChild.imgBase64,
+            prescription: dataChild.prescription,
             doctorId: dataModal.doctorId,
             patientId: dataModal.patientId,
             timeType: dataModal.timeType,
@@ -131,12 +133,14 @@ class ManagePatient extends Component {
                                 <table style={{ width: '100%' }}>
                                     <tbody>
                                         <tr>
-                                            <th>STT</th>
-                                            <th>Thời gian</th>
-                                            <th>Họ Và Tên</th>
-                                            <th>Địa Chỉ</th>
-                                            <th>Giới Tính</th>
-                                            <th>Actions</th>
+                                            <th style={{ width: "50px" }}>STT</th>
+                                            <th style={{ width: "180px" }}>Thời gian</th>
+                                            <th style={{ width: "200px" }}>Họ Và Tên</th>
+                                            <th style={{ width: "300px" }}>Địa Chỉ</th>
+                                            <th style={{ width: "100px" }}>Giới Tính</th>
+                                            <th
+                                                style={{ width: "500px" }}>Lý Do</th>
+                                            <th style={{ textAlign: "center" }}>Actions</th>
                                         </tr>
                                         {
                                             dataPatient && dataPatient.length > 0 ?
@@ -154,6 +158,11 @@ class ManagePatient extends Component {
                                                             <td>{item.patientData.firstName}</td>
                                                             <td>{item.patientData.address}</td>
                                                             <td>{gender}</td>
+                                                            <td>
+                                                                <label>
+                                                                    {item.reason}
+                                                                </label>
+                                                            </td>
                                                             <td>
                                                                 <button
                                                                     className="mp-btn-confirm"

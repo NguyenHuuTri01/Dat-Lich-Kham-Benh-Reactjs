@@ -104,13 +104,33 @@ class ManageDoctor extends Component {
     }
     return result;
   }
-
+  doctorLogin = (inputData) => {
+    let result = [];
+    let { language } = this.props;
+    if (inputData && inputData.firstName && inputData.lastName && inputData.id) {
+      let object = {};
+      let labelVi = `${inputData.lastName} ${inputData.firstName}`;
+      let labelEn = `${inputData.firstName} ${inputData.lastName}`;
+      object.label = language === LANGUAGES.VI ? labelVi : labelEn;
+      object.value = inputData.id;
+      result.push(object);
+    }
+    return result;
+  }
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.allDoctors !== this.props.allDoctors) {
       let dataSelect = this.buildDataInputSelect(this.props.allDoctors, 'USERS')
-      this.setState({
-        listDoctors: dataSelect
-      })
+      if (this.props.user.roleId === 'R2') {
+        let selectedDoctorDefault = this.doctorLogin(this.props.user)
+        this.setState({
+          listDoctors: selectedDoctorDefault,
+          selectedDoctor: selectedDoctorDefault[0]
+        })
+      } else {
+        this.setState({
+          listDoctors: dataSelect
+        })
+      }
     }
 
     if (prevProps.allRequiredDoctorIntor !== this.props.allRequiredDoctorIntor) {
@@ -145,6 +165,10 @@ class ManageDoctor extends Component {
         listPayment: dataSelectPayment,
         listProvince: dataSelectProvince,
         listClinic: dataSelectClinic
+      })
+      let selectedDoctorDefault = this.doctorLogin(this.props.user)
+      this.setState({
+        selectedDoctor: selectedDoctorDefault[0]
       })
     }
   }
@@ -386,6 +410,7 @@ const mapStateToProps = (state) => {
     language: state.app.language,
     allDoctors: state.admin.allDoctors,
     allRequiredDoctorIntor: state.admin.allRequiredDoctorIntor,
+    user: state.user.userInfo
   };
 };
 

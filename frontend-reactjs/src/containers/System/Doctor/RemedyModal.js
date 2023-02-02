@@ -11,7 +11,8 @@ class RemedyModal extends Component {
         super(props);
         this.state = {
             email: '',
-            imgBase64: ''
+            imgBase64: '',
+            prescription: ''
         }
     }
     async componentDidMount() {
@@ -33,6 +34,11 @@ class RemedyModal extends Component {
             email: event.target.value
         })
     }
+    handleOnChangePrescription = (event) => {
+        this.setState({
+            prescription: event.target.value
+        })
+    }
     handleOnChangeImage = async (event) => {
         let data = event.target.files;
         let file = data[0];
@@ -45,9 +51,20 @@ class RemedyModal extends Component {
     }
     handleSendRemedy = () => {
         this.props.sendRemedy(this.state);
+        this.setState({
+            imgBase64: '',
+            prescription: ''
+        })
+    }
+    handleCloseRemedyModal = () => {
+        this.props.closeRemedyModal();
+        this.setState({
+            imgBase64: '',
+            prescription: ''
+        })
     }
     render() {
-        let { isOpenModal, closeRemedyModal, dataModal, sendRemedy } = this.props;
+        let { isOpenModal } = this.props;
         return (
             <Modal
                 isOpen={isOpenModal}
@@ -61,7 +78,7 @@ class RemedyModal extends Component {
                         type="button"
                         className="close"
                         aria-label="Close"
-                        onClick={closeRemedyModal}
+                        onClick={() => this.handleCloseRemedyModal()}
                     >
                         <span aria-hidden="true">x</span>
                     </button>
@@ -77,19 +94,24 @@ class RemedyModal extends Component {
                                 onChange={(event) => this.handleOnChangeEmail(event)}
                             />
                         </div>
-                        <div className="col-6 form-group">
-                            <label>Chọn file đơn thuốc</label>
+                        <div className="col-12 form-group">
+                            <label>Đơn thuốc</label>
                             <input
                                 className="form-control-file"
                                 type="file"
                                 onChange={(event) => this.handleOnChangeImage(event)}
+                            />
+                            <textarea
+                                className="col-12"
+                                value={this.state.prescription}
+                                onChange={(event) => this.handleOnChangePrescription(event)}
                             />
                         </div>
                     </div>
                 </ModalBody>
                 <ModalFooter>
                     <Button color="primary" onClick={() => this.handleSendRemedy()}>Send</Button>{' '}
-                    <Button color="secondary" onClick={closeRemedyModal}>Cancel</Button>
+                    <Button color="secondary" onClick={() => this.handleCloseRemedyModal()}>Cancel</Button>
                 </ModalFooter>
             </Modal>
         );

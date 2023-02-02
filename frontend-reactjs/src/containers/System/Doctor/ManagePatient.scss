@@ -22,14 +22,14 @@ div._loading_overlay_wrapper {
             table,
             th,
             td {
-                border         : 1px solid black;
+                border         : 2px solid #000;
                 border-collapse: collapse;
             }
 
             th,
             td {
                 padding   : 5px;
-                text-align: left;
+                text-align: center;
             }
 
             button {
@@ -38,8 +38,15 @@ div._loading_overlay_wrapper {
                 cursor : pointer;
             }
 
+            label {
+                display           : -webkit-box;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                overflow          : hidden;
+                text-overflow     : ellipsis;
+            }
+
             .mp-btn-confirm {
-                margin-right : 10px;
                 height       : 30px;
                 border-radius: 3px;
                 background   : orange;
