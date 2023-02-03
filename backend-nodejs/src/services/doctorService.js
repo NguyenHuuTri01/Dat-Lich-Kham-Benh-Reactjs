@@ -245,6 +245,7 @@ let bulkCreateSchedule = (data) => {
         if (schedule && schedule.length > 0) {
           schedule = schedule.map(item => {
             item.maxNumber = MAX_NUMBER_SCHEDULE;
+            item.currentNumber = 0;
             return item;
           })
         }

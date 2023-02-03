@@ -31,7 +31,7 @@ let postBookAppointment = (data) => {
 
                 // upsert patient
                 let user = await db.User.findOrCreate({
-                    where: { email: data.email },
+                    where: { email: data.email, firstName: data.fullName },
                     defaults: {
                         email: data.email,
                         roleId: 'R3',
@@ -40,10 +40,11 @@ let postBookAppointment = (data) => {
                         firstName: data.fullName
                     }
                 });
+
                 // create a booking record
                 if (user && user[0]) {
                     await db.Booking.findOrCreate({
-                        where: { patientId: user[0].id },
+                        where: { patientId: user[0].id, statusId: 'S1' },
                         defaults: {
                             statusId: 'S1',
                             doctorId: data.doctorId,
@@ -86,7 +87,18 @@ let postVerifyBookAppointment = (data) => {
                 if (appointment) {
                     appointment.statusId = 'S2';
                     await appointment.save();
-
+                    let updateCurrentNumber = await db.Schedule.findOne({
+                        where: {
+                            date: appointment.date,
+                            timeType: appointment.timeType,
+                            doctorId: appointment.doctorId
+                        },
+                        raw: false
+                    })
+                    if (updateCurrentNumber) {
+                        updateCurrentNumber.currentNumber = updateCurrentNumber.currentNumber + 1;
+                        await updateCurrentNumber.save();
+                    }
                     resolve({
                         errCode: 0,
                         errMessage: "Update the appointment succeed!"
