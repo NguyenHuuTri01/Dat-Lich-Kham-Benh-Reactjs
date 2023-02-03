@@ -17,20 +17,39 @@ class DoctorSchedule extends Component {
             allAvalableTime: [],
             isOpenModalBooking: false,
             dataScheduleTimeModal: {},
+            sliceTime: []
         }
     }
     async componentDidMount() {
         let { language } = this.props;
         let allDays = this.getArrDays(language);
-
+        this.setState({
+            allDays: allDays,
+        })
         if (this.props.doctorIdFromParent) {
             let res = await getScheduleDoctorByDate(this.props.doctorIdFromParent, allDays[0].value)
             this.setState({
                 allAvalableTime: res.data ? res.data : []
             })
         }
+        this.selectiveAvalableTime();
+    }
+    selectiveAvalableTime = () => {
+        let getHoursNow = new Date().getHours();
+        let arrTime = ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8"]
+        let slicetime = []
+        if (getHoursNow <= 11) {
+            if (getHoursNow < 8) {
+                slicetime = arrTime.slice(0)
+            } else {
+                slicetime = arrTime.slice(getHoursNow - 8)
+            }
+        }
+        if (getHoursNow >= 13 && getHoursNow <= 17) {
+            slicetime = arrTime.slice(getHoursNow - 9)
+        }
         this.setState({
-            allDays: allDays,
+            sliceTime: slicetime
         })
     }
     capitalizeFirstLetter(string) {
@@ -81,6 +100,10 @@ class DoctorSchedule extends Component {
         }
     }
     handleOnChangeSelect = async (event) => {
+        let arrTime = ["T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8"]
+        this.setState({
+            sliceTime: arrTime
+        })
         if (this.props.doctorIdFromParent && this.props.doctorIdFromParent !== -1) {
             let doctorId = this.props.doctorIdFromParent;
             let date = event.target.value;
@@ -89,6 +112,10 @@ class DoctorSchedule extends Component {
                 this.setState({
                     allAvalableTime: res.data ? res.data : []
                 })
+            }
+            let datetostring = moment(new Date()).add(0, 'days').startOf('day').valueOf().toString();
+            if (date === datetostring) {
+                this.selectiveAvalableTime();
             }
         }
     }
@@ -106,7 +133,7 @@ class DoctorSchedule extends Component {
     }
 
     render() {
-        let { allDays, allAvalableTime, isOpenModalBooking, dataScheduleTimeModal } = this.state;
+        let { allDays, allAvalableTime, isOpenModalBooking, dataScheduleTimeModal, sliceTime } = this.state;
         let { language } = this.props;
         return (
             <>
@@ -145,7 +172,10 @@ class DoctorSchedule extends Component {
                                                 return (
                                                     <button
                                                         key={index}
-                                                        className={language === LANGUAGES.VI ? 'btn-vie' : 'btn-en'}
+                                                        className={
+                                                            sliceTime.includes(item.timeType) ?
+                                                                (language === LANGUAGES.VI ? 'btn-vie' : 'btn-en') : 'btn-hide'
+                                                        }
                                                         onClick={() => this.handleClickScheduleTime(item)}
                                                     >
                                                         {timeDisplay}

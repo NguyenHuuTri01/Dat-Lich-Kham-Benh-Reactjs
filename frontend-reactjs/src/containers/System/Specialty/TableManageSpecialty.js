@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import './TableManageSpecialty.scss';
 import "react-markdown-editor-lite/lib/index.css";
@@ -32,10 +31,15 @@ class TableManageSpecialty extends Component {
         }
     }
     handleDeleteSpecialty = async (item) => {
-        let res = await deleteSpecialty(item.id);
-        if (res && res.errCode === 0) {
-            toast.success('Delete Specialty is success!');
-            this.updateListSpecialty();
+        let answer = window.confirm("Bạn muốn xóa chuyên khoa này");
+        if (answer) {
+            let res = await deleteSpecialty(item.id);
+            if (res && res.errCode === 0) {
+                toast.success('Delete Specialty is success!');
+                this.updateListSpecialty();
+            }
+        } else {
+            // do something
         }
     };
     handleEditSpecialty = (item) => {

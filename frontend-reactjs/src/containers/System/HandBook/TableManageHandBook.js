@@ -33,10 +33,15 @@ class TableManageHandBook extends Component {
         }
     }
     handleDeleteHandBook = async (item) => {
-        let res = await deleteHandBook(item.id);
-        if (res && res.errCode === 0) {
-            toast.success('Delete handbook is success!');
-            this.updateListHandBook();
+        let answer = window.confirm("Bạn muốn xóa cẩm nang này");
+        if (answer) {
+            let res = await deleteHandBook(item.id);
+            if (res && res.errCode === 0) {
+                toast.success('Delete handbook is success!');
+                this.updateListHandBook();
+            }
+        } else {
+            // do something
         }
     };
     handleEditHandBook = (item) => {

@@ -126,6 +126,7 @@ class ManageDoctor extends Component {
           listDoctors: selectedDoctorDefault,
           selectedDoctor: selectedDoctorDefault[0]
         })
+        this.handleChangeSelect(this.state.selectedDoctor);
       } else {
         this.setState({
           listDoctors: dataSelect

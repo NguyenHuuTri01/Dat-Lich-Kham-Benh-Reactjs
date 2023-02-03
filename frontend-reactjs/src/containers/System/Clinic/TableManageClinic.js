@@ -32,10 +32,15 @@ class TableManageClinic extends Component {
         }
     }
     handleDeleteClinic = async (item) => {
-        let res = await deleteClinic(item.id);
-        if (res && res.errCode === 0) {
-            toast.success('Delete clinic is success!');
-            this.updateListClinic();
+        let answer = window.confirm("Bạn muốn xóa phòng khám này");
+        if (answer) {
+            let res = await deleteClinic(item.id);
+            if (res && res.errCode === 0) {
+                toast.success('Delete clinic is success!');
+                this.updateListClinic();
+            }
+        } else {
+            // do something
         }
     };
     handleEditClinic = (item) => {

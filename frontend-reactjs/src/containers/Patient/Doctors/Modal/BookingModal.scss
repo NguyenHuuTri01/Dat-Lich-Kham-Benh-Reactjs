@@ -36,6 +36,14 @@
         .booking-modal-body {
             padding: 15px;
             height : 100%;
+
+            .message-full-slot {
+                width     : 100%;
+                margin    : 50px 0;
+                text-align: center;
+                color     : red;
+                font-size : 25px;
+            }
         }
 
         .booking-modal-footer {
@@ -59,6 +67,10 @@
                 &:hover {
                     opacity: 0.8;
                 }
+            }
+
+            .hide-btn-confirm {
+                display: none;
             }
 
             .btn-booking-cancel {

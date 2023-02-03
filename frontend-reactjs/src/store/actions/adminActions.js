@@ -10,7 +10,6 @@ import {
   saveDetailDoctorService,
   getTopSpecialty,
   getAllClinic,
-  getAllHandBook
 } from "../../services/userService";
 import { toast } from "react-toastify";
 

@@ -29,7 +29,12 @@ class TableManageUser extends Component {
     }
   }
   handleDeleteUser = (user) => {
-    this.props.deleteAUserRedux(user.id);
+    let answer = window.confirm("Bạn muốn xóa người dùng này");
+    if (answer) {
+      this.props.deleteAUserRedux(user.id);
+    } else {
+      // do something
+    }
   };
   handleEditUser = (user) => {
     this.props.handleEditUserFromParent(user);
